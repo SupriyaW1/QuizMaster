@@ -1,1 +1,1 @@
-# QuizzMaster
+# QuizMaster
