@@ -1,1 +1,9 @@
 Hello Akshay
+
+git status //for status 
+git checkout Saurabh //change branch to saurabh
+git branch //for checking current branch
+git pull //retrive the data
+git add . //add the data to repository
+git commit -m "what you update changes "
+git push origin Saurabh //final push
