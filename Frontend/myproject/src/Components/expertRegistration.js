@@ -1,89 +1,89 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 
-export default function ExpertRegistration() {
-  const initialFormData = {
-    fname: '',
-    lname: '',
-    qualification: '',
-    subject: '',
-    contact: '',
-    email: '',
-    password: '',
-  };
+const initialFormData = {
+  firstName: '',
+  lastName: '',
+  qualification: '',
+  subject: '',
+  contact: '',
+  email: '',
+  pwd: '',
+  uname: ''
+};
 
-  const [formData, setFormData] = useState(initialFormData);
-  const [errors, setErrors] = useState({});
+const initialErrors = {};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_FIELD':
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+    case 'SET_ERRORS':
+      return {
+        ...state,
+        errors: action.errors
+      };
+    case 'RESET_FORM':
+      return initialFormData;
+    default:
+      return state;
+  }
+};
+
+const ExpertRegistration = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialFormData,
+    errors: initialErrors
+  });
+
+  const { errors } = state;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let updatedValue = value;
+    let error = '';
 
-    // Format first name and last name: Capitalize first letter, lowercase the rest
-    if (name === 'fname' || name === 'lname') {
-      updatedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-    }
-
-    // Validate contact: Only allow digits and limit to 10 characters
     if (name === 'contact') {
       if (!/^\d*$/.test(value)) {
-        return; // Prevent input if not a digit
+        error = 'Contact must contain only digits.';
+      } else if (value.length > 10) {
+        error = 'Contact must not exceed 10 digits.';
       }
-      if (value.length > 10) {
-        return; // Limit input to 10 characters
+    } else if (name === 'uname') {
+      if (!/^[a-zA-Z]*$/.test(value)) {
+        error = 'Username must contain only alphabetic characters.';
       }
     }
-
-    setFormData({
-      ...formData,
-      [name]: updatedValue
-    });
-
-    // Clear error message if field has been filled
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: ''
-      });
+  
+    // If there's an error, don't update the form data
+    if (error === '') {
+      dispatch({ type: 'SET_FIELD', field: name, value });
     }
-  };
 
-  const handleReset = () => {
-    // Clear form data and errors
-    setFormData(initialFormData);
-    setErrors({});
+    dispatch({ type: 'SET_ERRORS', errors: { ...errors, [name]: error } });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const validationErrors = {};
-
-    // Basic validation
-    for (const field in formData) {
-      if (!formData[field].trim()) {
-        validationErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
+    for (const key in state) {
+      if (state[key].trim() === '' && key !== 'errors') {
+        validationErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`;
       }
     }
-
-    // Contact validation
-    if (!formData.contact.trim()) {
-      validationErrors.contact = 'Contact is required.';
-    } else if (!/^\d+$/.test(formData.contact)) {
-      validationErrors.contact = 'Contact must contain only digits.';
-    } else if (formData.contact.length !== 10) {
-      validationErrors.contact = 'Contact must be 10 digits long.';
-    }
-    if (formData.fname.trim() !== '' && (formData.fname[0] !== formData.fname[0].toUpperCase() || formData.fname.slice(1) !== formData.fname.slice(1).toLowerCase())) {
-        validationErrors.fname = 'Name must start with a capital letter.';
-      }
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+      dispatch({ type: 'SET_ERRORS', errors: validationErrors });
+    } else {
+      console.log("Form submitted:", state);
+      dispatch({ type: 'RESET_FORM' });
     }
-    
-    // Submit the form data if no validation errors
-    console.log('Form data:', formData);
-    // Add code to send the form data to the server here
+  };
+
+  const handleReset = () => {
+    dispatch({ type: 'RESET_FORM' });
   };
 
   return (
@@ -102,8 +102,9 @@ export default function ExpertRegistration() {
                       id="fname"
                       name="fname"
                       className={`form-control ${errors.fname && 'is-invalid'}`}
-                      value={formData.fname}
+                      value={state.fname}
                       onChange={handleChange}
+                      placeholder="Enter First Name"
                     />
                     {errors.fname && <div className="invalid-feedback">{errors.fname}</div>}
                   </div>
@@ -116,8 +117,9 @@ export default function ExpertRegistration() {
                       id="lname"
                       name="lname"
                       className={`form-control ${errors.lname && 'is-invalid'}`}
-                      value={formData.lname}
+                      value={state.lname}
                       onChange={handleChange}
+                      placeholder="Enter Last Name"
                     />
                     {errors.lname && <div className="invalid-feedback">{errors.lname}</div>}
                   </div>
@@ -130,8 +132,9 @@ export default function ExpertRegistration() {
                       id="qualification"
                       name="qualification"
                       className={`form-control ${errors.qualification && 'is-invalid'}`}
-                      value={formData.qualification}
+                      value={state.qualification}
                       onChange={handleChange}
+                      placeholder="Enter Qualification"
                     />
                     {errors.qualification && <div className="invalid-feedback">{errors.qualification}</div>}
                   </div>
@@ -144,8 +147,9 @@ export default function ExpertRegistration() {
                       id="subject"
                       name="subject"
                       className={`form-control ${errors.subject && 'is-invalid'}`}
-                      value={formData.subject}
+                      value={state.subject}
                       onChange={handleChange}
+                      placeholder="Enter Subject"
                     />
                     {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
                   </div>
@@ -158,8 +162,10 @@ export default function ExpertRegistration() {
                       id="contact"
                       name="contact"
                       className={`form-control ${errors.contact && 'is-invalid'}`}
-                      value={formData.contact}
+                      value={state.contact}
                       onChange={handleChange}
+                      placeholder="Enter Contact"
+                      maxLength={10}
                     />
                     {errors.contact && <div className="invalid-feedback">{errors.contact}</div>}
                   </div>
@@ -172,24 +178,41 @@ export default function ExpertRegistration() {
                       id="email"
                       name="email"
                       className={`form-control ${errors.email && 'is-invalid'}`}
-                      value={formData.email}
+                      value={state.email}
                       onChange={handleChange}
+                      placeholder="Enter Email"
                     />
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                   </div>
                 </div>
                 <div className="mb-3 row">
-                  <label htmlFor="password" className="col-sm-4 col-form-label text-end">Password:</label>
+                  <label htmlFor="uname" className="col-sm-4 col-form-label text-end">Username:</label>
+                  <div className="col-sm-8">
+                    <input
+                      type="text"
+                      id="uname"
+                      name="uname"
+                      className={`form-control ${errors.uname && 'is-invalid'}`}
+                      value={state.uname}
+                      onChange={handleChange}
+                      placeholder="Enter Username"
+                    />
+                    {errors.uname && <div className="invalid-feedback">{errors.uname}</div>}
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label htmlFor="pwd" className="col-sm-4 col-form-label text-end">Password:</label>
                   <div className="col-sm-8">
                     <input
                       type="password"
-                      id="password"
-                      name="password"
-                      className={`form-control ${errors.password && 'is-invalid'}`}
-                      value={formData.password}
+                      id="pwd"
+                      name="pwd"
+                      className={`form-control ${errors.pwd && 'is-invalid'}`}
+                      value={state.pwd}
                       onChange={handleChange}
+                      placeholder="Enter Password"
                     />
-                    {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                    {errors.pwd && <div className="invalid-feedback">{errors.pwd}</div>}
                   </div>
                 </div>
                 <div className="text-center">
@@ -203,4 +226,6 @@ export default function ExpertRegistration() {
       </div>
     </div>
   );
-}
+};
+
+export default ExpertRegistration;

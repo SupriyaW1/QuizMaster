@@ -1,34 +1,51 @@
-import { Link, Routes,Route } from 'react-router-dom';
-import './App.css'
+
 import Signup from './Components/signup';
-import Login from './Components/login';
 import AdminHome from './Components/adminHome';
 import ExpertRegistration from './Components/expertRegistration';
+import { Link, Route, Routes } from 'react-router-dom';
+import Login from './Components/login';
+import StudentHome from './Components/studentHome';
+import ExpertHome from './Components/expertHome';
+import { useSelector } from 'react-redux';
+
 function App() {
+  const logstate = useSelector(state => state.logged)
+
   return (
     <div className="App">
-       <h1 className="bg-primary text-white">Home Page of Project </h1>
-        <ul className="nav navbar"> 
+      <header >
+        <div style={{display: logstate.loggedIn?"none":"block"}}>
+       <ul className="nav navbar"> 
            <li className="nav-item">
-            <Link to={"/signup"} className="nav-link">Sign Up</Link> 
+              <Link to={"/login"} className="nav-link">Login</Link>
            </li>
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">Log-In</Link>
-            </li>  
-            <li className="nav-item">
-              <Link to={"/adminHome"}>Admin Page</Link>
-            
+           <li className="nav-item">
+                <Link to="/signup" className="nav-link">SignUp</Link>
             </li>
+            <li className="nav-item" >
+                 <Link to="/adminHome" className="nav-link">HomePage</Link> 
+            </li>
+           
        </ul>
+       </div>
+       
+    
        <Routes>
-       <Route path="/signup" element={<Signup/>} />
-       <Route path="/login" element={<Login/>}/>
-       <Route path="/adminHome" element={<AdminHome/>}/>
-       <Route path="/expertRegistration" element={<ExpertRegistration/>} />
-       </Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/studentHome" element={<StudentHome/>}/>
+          <Route path="/expertHome" element={<ExpertHome/>}/>
+          <Route path="/adminHome" element={<AdminHome/>}/>
+          <Route path="/expertRegistration" element={<ExpertRegistration/>} />
+          
 
+      </Routes>
+
+      </header>
     </div>
   );
+
+
 }
 
 export default App;

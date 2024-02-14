@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "experts")
 public class Expert {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int expert_id;
@@ -21,7 +21,6 @@ public class Expert {
 	String subject;
 	String contact;
 	String email;
-	
 	@OneToOne
 	@JoinColumn(name = "uid")
 	User uid;
@@ -31,8 +30,10 @@ public class Expert {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Expert(String fname, String lname, String qualification, String subject, String contact,
-			String email, User uid) {
+	
+
+	public Expert(String fname, String lname, String qualification, String subject, String contact, String email,
+			User uid) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
@@ -42,6 +43,8 @@ public class Expert {
 		this.email = email;
 		this.uid = uid;
 	}
+
+
 
 	public int getExpert_id() {
 		return expert_id;
@@ -91,15 +94,7 @@ public class Expert {
 		this.contact = contact;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public User getUid() {
+	User getUid() {
 		return uid;
 	}
 
@@ -110,10 +105,7 @@ public class Expert {
 	@Override
 	public String toString() {
 		return "Expert [expert_id=" + expert_id + ", fname=" + fname + ", lname=" + lname + ", qualification="
-				+ qualification + ", subject=" + subject + ", contact=" + contact + ", email=" + email + ", uid=" + uid
-				+ "]";
+				+ qualification + ", subject=" + subject + ", contact=" + contact +  ", uid=" + uid + "]";
 	}
-	
-	
 
 }

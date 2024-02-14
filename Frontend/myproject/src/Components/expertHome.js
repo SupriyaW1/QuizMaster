@@ -1,17 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function AdminHome() {
+export default function ExpertHome() {
   return (
     <div>
-      <h1>Welcome Admin</h1>
+      <h1>Welcome Expert</h1>
       <Link to="/login">
         <button>Logout</button>
       </Link>
-      <Link to="/expertRegistration">
-        
-        <link>Expert Registration</link>
-      </Link>
+      
     </div>
   );
 }

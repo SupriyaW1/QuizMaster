@@ -29,4 +29,8 @@ public class UserService {
 		return u;
 	}
 
+	public User save(User user) {
+		return urepo.save(user);
+	}
+
 }

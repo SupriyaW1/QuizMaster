@@ -1,6 +1,8 @@
 package com.quizmaster.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +21,15 @@ public class UserController {
 	UserService uservice;
 	
 	@PostMapping("/checkUser")
-	public User checkUser(@RequestBody UserCheck ucheck) {	
+	public ResponseEntity<User> checkUser(@RequestBody UserCheck ucheck) {	
 	User	user= uservice.getUser(ucheck.getUname(),ucheck.getPwd());
 		System.out.println(user);
-		return user;
+		if(user!=null)
+			return ResponseEntity.status(HttpStatus.OK).body(user);
+		else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
+	
 
 }
