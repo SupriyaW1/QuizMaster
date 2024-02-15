@@ -28,7 +28,7 @@ public class Payment {
 	
 	String mode;
 	Date date;
-	Date expiraydate;
+	Date expirydate;
 	
 	@OneToOne
 	@JoinColumn(name = "sid")

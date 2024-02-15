@@ -1,50 +1,48 @@
-
-import Signup from './Components/signup';
-import AdminHome from './Components/adminHome';
-import ExpertRegistration from './Components/expertRegistration';
+import ExpertRegistration from './components/ExpertRegistration';
 import { Link, Route, Routes } from 'react-router-dom';
-import Login from './Components/login';
-import StudentHome from './Components/studentHome';
-import ExpertHome from './Components/expertHome';
+import Login from './components/Login';
 import { useSelector } from 'react-redux';
+import Signup from './components/Signup';
+import AdminHome from './components/AdminHome';
+import Logout from './components/Logout';
+import ExpertHome from './components/ExpertHome';
 
 function App() {
+  //initial state of logged
   const logstate = useSelector(state => state.logged)
 
   return (
     <div className="App">
-      <header >
-        <div style={{display: logstate.loggedIn?"none":"block"}}>
-       <ul className="nav navbar"> 
-           <li className="nav-item">
-              <Link to={"/login"} className="nav-link">Login</Link>
-           </li>
-           <li className="nav-item">
-                <Link to="/signup" className="nav-link">SignUp</Link>
-            </li>
-            <li className="nav-item" >
-                 <Link to="/adminHome" className="nav-link">HomePage</Link> 
-            </li>
-           
-       </ul>
-       </div>
-       
-    
-       <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/studentHome" element={<StudentHome/>}/>
-          <Route path="/expertHome" element={<ExpertHome/>}/>
-          <Route path="/adminHome" element={<AdminHome/>}/>
-          <Route path="/expertRegistration" element={<ExpertRegistration/>} />
-          
-
-      </Routes>
-
-      </header>
+      <div style={{display:logstate.loggedIn?"none":"block"}}>
+    <h1 className="bg-primary text-white">Home Page of Project </h1>
+     <ul className="nav navbar"> 
+        <li className="nav-item">
+         <Link to={"/signup"} className="nav-link">Student Sign Up</Link> 
+        </li>
+         <li className="nav-item">
+           <Link to={"/login"} className="nav-link">Log-In</Link>
+         </li>  
+         <li className="nav-item">
+           <Link to={"/adminHome"}>Admin Page</Link>
+         </li>
+    </ul>
     </div>
-  );
+    <Routes>
+    <Route path="/signup" element={<Signup/>} />
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/adminHome" element={<AdminHome/>}>
+           <Route path="expertRegistration" element={<ExpertRegistration />} />
+          {/* <Route path="manageAccount" element={<ManageAccount />} />
+          <Route path="createQuizCategories" element={<CreateQuizCategories />} />
+          <Route path="addQuizzes" element={<AddQuizzes />} /> */}
+    </Route>
+    <Route path="/logout" element={<Logout/>}></Route>
+    <Route path="/expertHome" element={<ExpertHome/>}></Route>
+    </Routes>
 
+ </div>
+); 
+  
 
 }
 

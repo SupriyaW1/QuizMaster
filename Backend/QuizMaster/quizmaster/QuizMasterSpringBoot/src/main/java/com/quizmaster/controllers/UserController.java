@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	UserService uservice;
 	
-	@PostMapping("/checkUser")
+	@PostMapping("/login")
 	public ResponseEntity<User> checkUser(@RequestBody UserCheck ucheck) {	
 	User	user= uservice.getUser(ucheck.getUname(),ucheck.getPwd());
 		System.out.println(user);

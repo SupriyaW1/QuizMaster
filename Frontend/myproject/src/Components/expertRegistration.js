@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
 
 const initialFormData = {
-  firstName: '',
-  lastName: '',
+  fname: '',
+  lname: '',
   qualification: '',
   subject: '',
   contact: '',
@@ -42,43 +42,56 @@ const ExpertRegistration = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let error = '';
-
-    if (name === 'contact') {
-      if (!/^\d*$/.test(value)) {
-        error = 'Contact must contain only digits.';
-      } else if (value.length > 10) {
-        error = 'Contact must not exceed 10 digits.';
-      }
-    } else if (name === 'uname') {
-      if (!/^[a-zA-Z]*$/.test(value)) {
-        error = 'Username must contain only alphabetic characters.';
-      }
-    }
-  
-    // If there's an error, don't update the form data
-    if (error === '') {
-      dispatch({ type: 'SET_FIELD', field: name, value });
-    }
-
-    dispatch({ type: 'SET_ERRORS', errors: { ...errors, [name]: error } });
+    dispatch({ type: 'SET_FIELD', field: name, value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const validationErrors = {};
-    for (const key in state) {
-      if (state[key].trim() === '' && key !== 'errors') {
-        validationErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`;
+
+    // Basic validation
+    for (const field in initialFormData) {
+      if (!state[field].trim()) {
+        validationErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
       }
+    }
+
+    // Contact validation
+    if (!state.contact.trim()) {
+      validationErrors.contact = 'Contact is required.';
+    } else if (!/^\d+$/.test(state.contact)) {
+      validationErrors.contact = 'Contact must contain only digits.';
+    } else if (state.contact.length !== 10) {
+      validationErrors.contact = 'Contact must be 10 digits long.';
+    }
+
+    if (state.fname.trim() !== '' && (state.fname[0] !== state.fname[0].toUpperCase() || state.fname.slice(1) !== state.fname.slice(1).toLowerCase())) {
+      validationErrors.fname = 'Name must start with a capital letter.';
     }
 
     if (Object.keys(validationErrors).length > 0) {
       dispatch({ type: 'SET_ERRORS', errors: validationErrors });
-    } else {
-      console.log("Form submitted:", state);
-      dispatch({ type: 'RESET_FORM' });
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/expertRegistration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(state),
+      });
+
+      if (response.ok) {
+        console.log('Expert added successfully');
+        // Navigate to the adminHome page after successful addition
+        window.location.assign("/adminHome");
+      } else {
+        console.error('Error adding expert:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding expert:', error.message);
     }
   };
 
@@ -94,6 +107,7 @@ const ExpertRegistration = () => {
             <div className="card-body">
               <h2 className="card-title text-center mb-4"><b><u>Expert Registration</u></b></h2>
               <form onSubmit={handleSubmit}>
+                {/* First Name */}
                 <div className="mb-3 row">
                   <label htmlFor="fname" className="col-sm-4 col-form-label text-end">First Name:</label>
                   <div className="col-sm-8">
@@ -104,11 +118,12 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.fname && 'is-invalid'}`}
                       value={state.fname}
                       onChange={handleChange}
-                      placeholder="Enter First Name"
+                      placeholder="Write First Name Here"
                     />
                     {errors.fname && <div className="invalid-feedback">{errors.fname}</div>}
                   </div>
                 </div>
+                {/* Last Name */}
                 <div className="mb-3 row">
                   <label htmlFor="lname" className="col-sm-4 col-form-label text-end">Last Name:</label>
                   <div className="col-sm-8">
@@ -119,11 +134,12 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.lname && 'is-invalid'}`}
                       value={state.lname}
                       onChange={handleChange}
-                      placeholder="Enter Last Name"
+                      placeholder="Write Last Name Here"
                     />
                     {errors.lname && <div className="invalid-feedback">{errors.lname}</div>}
                   </div>
                 </div>
+                {/* Qualification */}
                 <div className="mb-3 row">
                   <label htmlFor="qualification" className="col-sm-4 col-form-label text-end">Qualification:</label>
                   <div className="col-sm-8">
@@ -134,11 +150,12 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.qualification && 'is-invalid'}`}
                       value={state.qualification}
                       onChange={handleChange}
-                      placeholder="Enter Qualification"
+                      placeholder="Write Qualification Here"
                     />
                     {errors.qualification && <div className="invalid-feedback">{errors.qualification}</div>}
                   </div>
                 </div>
+                {/* Subject */}
                 <div className="mb-3 row">
                   <label htmlFor="subject" className="col-sm-4 col-form-label text-end">Subject:</label>
                   <div className="col-sm-8">
@@ -149,11 +166,12 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.subject && 'is-invalid'}`}
                       value={state.subject}
                       onChange={handleChange}
-                      placeholder="Enter Subject"
+                      placeholder="Write Subject Here"
                     />
                     {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
                   </div>
                 </div>
+                {/* Contact */}
                 <div className="mb-3 row">
                   <label htmlFor="contact" className="col-sm-4 col-form-label text-end">Contact:</label>
                   <div className="col-sm-8">
@@ -164,12 +182,13 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.contact && 'is-invalid'}`}
                       value={state.contact}
                       onChange={handleChange}
-                      placeholder="Enter Contact"
+                      placeholder="Write Contact Here"
                       maxLength={10}
                     />
                     {errors.contact && <div className="invalid-feedback">{errors.contact}</div>}
                   </div>
                 </div>
+                {/* Email */}
                 <div className="mb-3 row">
                   <label htmlFor="email" className="col-sm-4 col-form-label text-end">Email:</label>
                   <div className="col-sm-8">
@@ -180,12 +199,13 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.email && 'is-invalid'}`}
                       value={state.email}
                       onChange={handleChange}
-                      placeholder="Enter Email"
+                      placeholder="Write Email Here"
                     />
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                   </div>
                 </div>
-                <div className="mb-3 row">
+                 {/* Username */}
+                 <div className="mb-3 row">
                   <label htmlFor="uname" className="col-sm-4 col-form-label text-end">Username:</label>
                   <div className="col-sm-8">
                     <input
@@ -195,26 +215,29 @@ const ExpertRegistration = () => {
                       className={`form-control ${errors.uname && 'is-invalid'}`}
                       value={state.uname}
                       onChange={handleChange}
-                      placeholder="Enter Username"
+                      placeholder="Write Username Here"
                     />
                     {errors.uname && <div className="invalid-feedback">{errors.uname}</div>}
                   </div>
                 </div>
+                {/* pwd */}
                 <div className="mb-3 row">
                   <label htmlFor="pwd" className="col-sm-4 col-form-label text-end">Password:</label>
                   <div className="col-sm-8">
                     <input
-                      type="password"
+                      type="pwd"
                       id="pwd"
                       name="pwd"
                       className={`form-control ${errors.pwd && 'is-invalid'}`}
                       value={state.pwd}
                       onChange={handleChange}
-                      placeholder="Enter Password"
+                      placeholder="Write pwd Here"
                     />
                     {errors.pwd && <div className="invalid-feedback">{errors.pwd}</div>}
                   </div>
                 </div>
+               
+                {/* Form buttons */}
                 <div className="text-center">
                   <button type="submit" className="btn btn-primary">Add Expert</button>
                   <button type="button" className="btn btn-primary" onClick={handleReset}>Reset</button>

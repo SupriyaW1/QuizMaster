@@ -4,7 +4,8 @@ import { logout } from "./slice";
 
 export default function Logout() {
     const dispatch = useDispatch();
-    const navigate=useNavigate('/login')
+    const navigate=useNavigate();
+    localStorage.clear();
     dispatch(logout());
     const mystate = useSelector(state=>state.logged);
     navigate("/login");

@@ -4,9 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quizmaster.entities.Expert;
+import com.quizmaster.entities.Student;
+
 @Transactional
 @Repository
-public interface ExpertRepository extends JpaRepository<Expert, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 }

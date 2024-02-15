@@ -1,71 +1,109 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
-export default function Signup() {
-  const initialFormData = {
-    firstName: '',
-    lastName: '',
-    birthDate: '',
-    education: '',
-    contact: '',
-    email: '',
-    
-  };
+const initialState = {
+  formData: {
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    education: "",
+    contact: "",
+    email: "",
+    uname: "",
+    pwd: "",
+    subscription: false,
+    upiId: "",
+    paymentDate: "",
+    amountToPay: ""
+  },
+  errors: {}
+};
 
-  const [formData, setFormData] = useState(initialFormData);
-  const [errors, setErrors] = useState({});
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "UPDATE_FORM_DATA":
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          [action.payload.name]: action.payload.value
+        }
+      };
+    case "UPDATE_ERRORS":
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          [action.payload.name]: action.payload.error
+        }
+      };
+    case "RESET_FORM":
+      return initialState;
+    default:
+      return state;
+  }
+};
+
+const Signup = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { formData, errors } = state;
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    let error = '';
+    const { name, value, type, checked } = e.target;
+    let error = "";
 
-    if (name === 'firstName' || name === 'lastName') {
-      if (/\d/.test(value)) {
-        error = 'Name must not contain numbers.';
-      }
-    } else if (name === 'contact') {
-      if (!/^\d*$/.test(value)) {
-        error = 'Contact must contain only digits.';
-      } else if (value.length > 10) {
-        error = 'Contact must not exceed 10 digits.';
-      }
+    switch (name) {
+      case "firstName":
+      case "lastName":
+        if (!/^[a-zA-Z]*$/.test(value)) {
+          error = "Name must contain only letters.";
+        }
+        break;
+      case "contact":
+        if (!/^\d*$/.test(value)) {
+          error = "Contact must contain only digits.";
+        } else if (value.length > 10) {
+          error = "Contact must not exceed 10 digits.";
+        }
+        break;
+      case "email":
+        if (!/\S+@\S+\.\S+/.test(value)) {
+          error = "Invalid email address.";
+        }
+        break;
+      case "pwd":
+        if (value.length < 8) {
+          error = "Password must be at least 8 characters long.";
+        }
+        break;
+      default:
+        break;
     }
 
-    // If there's an error, don't update the form data
-    if (error === '') {
-      setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    }
-
-    setErrors(prevErrors => ({
-      ...prevErrors,
-      [name]: error
-    }));
+    dispatch({ type: "UPDATE_FORM_DATA", payload: { name, value, type, checked } });
+    dispatch({ type: "UPDATE_ERRORS", payload: { name, error } });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationErrors = {};
-    for (const key in formData) {
-      if (formData[key].trim() === '') {
-        validationErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`;
-      }
-    }
+    const response = await fetch("http://localhost:8080/studentRegistration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (response.ok) {
+      console.log("Form submitted successfully");
+      dispatch({ type: "RESET_FORM" });
     } else {
-      console.log("Form submitted:", formData);
-      setFormData(initialFormData);
-      setErrors({});
+      console.error("Error submitting form");
     }
   };
 
   const handleReset = () => {
-    setFormData(initialFormData);
-    setErrors({});
+    dispatch({ type: "RESET_FORM" });
   };
 
   return (
@@ -129,12 +167,13 @@ export default function Signup() {
             <div className="mb-3">
               <label className="form-label" htmlFor="contact">Contact:</label>
               <input
-                type="tel"
+                type="number"
                 id="contact"
                 name="contact"
                 className="form-control"
                 placeholder="Enter your contact number"
                 value={formData.contact}
+                maxLength={10}
                 onChange={handleChange}
               />
               {errors.contact && <p className="text-danger">{errors.contact}</p>}
@@ -152,7 +191,32 @@ export default function Signup() {
               />
               {errors.email && <p className="text-danger">{errors.email}</p>}
             </div>
-
+            <div className="mb-3">
+              <label className="form-label" htmlFor="uname">Username:</label>
+              <input
+                type="text"
+                id="uname"
+                name="uname"
+                className="form-control"
+                placeholder="Enter your username"
+                value={formData.uname}
+                onChange={handleChange}
+              />
+              {errors.uname && <p className="text-danger">{errors.uname}</p>}
+            </div>
+            <div className="mb-3">
+              <label className="form-label" htmlFor="pwd">Password:</label>
+              <input
+                type="password"
+                id="pwd"
+                name="pwd"
+                className="form-control"
+                placeholder="Enter your password"
+                value={formData.pwd}
+                onChange={handleChange}
+              />
+              {errors.pwd && <p className="text-danger">{errors.pwd}</p>}
+            </div>
             <div className="mb-3 form-check">
               <input
                 type="checkbox"
@@ -204,7 +268,6 @@ export default function Signup() {
                 </div>
               </>
             )}
-
             <div className="text-center">
               <button type="submit" className="btn btn-primary mr-2">Submit</button>
               <button type="button" className="btn btn-primary mr-2" onClick={handleReset}>Reset</button>
@@ -214,4 +277,6 @@ export default function Signup() {
       </div>
     </div>
   );
-}
+};
+
+export default Signup;
