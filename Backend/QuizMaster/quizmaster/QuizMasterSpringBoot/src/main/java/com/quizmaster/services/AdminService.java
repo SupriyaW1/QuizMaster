@@ -1,19 +1,20 @@
 package com.quizmaster.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quizmaster.entities.Expert;
-import com.quizmaster.repositories.ExpertRepository;
+import com.quizmaster.repositories.AdminRepository;
 
 @Service
-public class ExpertService {
+public class AdminService {
 
 	@Autowired
-	ExpertRepository expertRepo;
-
-	public Expert saveExpert(Expert expert) {
-		return expertRepo.save(expert);
+	AdminRepository adminRepo;
+	public List<Expert> getAllExperts() {
+		return adminRepo.findAll();
 	}
 
 }

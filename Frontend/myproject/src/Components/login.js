@@ -1,5 +1,5 @@
 import { useState, useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { login } from "./slice";
@@ -25,7 +25,7 @@ export default function Login() {
   const [users, dispatch] = useReducer(reducer, init);
   const [info, setInfo] = useState("");
   const myaction = useDispatch();
-  const mystate = useSelector((state) => state.logged);
+  //const mystate = useSelector((state) => state.logged);
   const navigate = useNavigate();
   const reduxAction=useDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -52,18 +52,21 @@ export default function Login() {
           reduxAction(login())
         if (data && data.role_id) {
           if (data.role_id.role_id === 1) {
+          //  localStorage.setItem("name", data.username);
             navigate("/adminHome");
             myaction(login());
           }
           else if (data.role_id.role_id === 2) {
             console.log("valid ");
             console.log("after dispatch");
+            //localStorage.setItem("name", data.username);
             navigate("/studentHome");
             myaction(login());
           }
           else if (data.role_id.role_id === 4) {
             console.log("valid ");
             console.log("after dispatch");
+            localStorage.setItem("name", data.username);
             navigate("/expertHome");
             myaction(login());
           }

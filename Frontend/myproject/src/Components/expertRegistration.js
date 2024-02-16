@@ -1,5 +1,5 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useReducer } from 'react';
-
 const initialFormData = {
   fname: '',
   lname: '',
@@ -12,7 +12,6 @@ const initialFormData = {
 };
 
 const initialErrors = {};
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_FIELD':
@@ -39,7 +38,7 @@ const ExpertRegistration = () => {
   });
 
   const { errors } = state;
-
+  const navigate=useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({ type: 'SET_FIELD', field: name, value });
@@ -49,14 +48,12 @@ const ExpertRegistration = () => {
     e.preventDefault();
     const validationErrors = {};
 
-    // Basic validation
     for (const field in initialFormData) {
       if (!state[field].trim()) {
         validationErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
       }
     }
 
-    // Contact validation
     if (!state.contact.trim()) {
       validationErrors.contact = 'Contact is required.';
     } else if (!/^\d+$/.test(state.contact)) {
@@ -85,8 +82,7 @@ const ExpertRegistration = () => {
 
       if (response.ok) {
         console.log('Expert added successfully');
-        // Navigate to the adminHome page after successful addition
-        window.location.assign("/adminHome");
+        navigate("/adminHome");
       } else {
         console.error('Error adding expert:', response.statusText);
       }
@@ -176,7 +172,7 @@ const ExpertRegistration = () => {
                   <label htmlFor="contact" className="col-sm-4 col-form-label text-end">Contact:</label>
                   <div className="col-sm-8">
                     <input
-                      type="text"
+                      type="tel"
                       id="contact"
                       name="contact"
                       className={`form-control ${errors.contact && 'is-invalid'}`}
@@ -225,7 +221,7 @@ const ExpertRegistration = () => {
                   <label htmlFor="pwd" className="col-sm-4 col-form-label text-end">Password:</label>
                   <div className="col-sm-8">
                     <input
-                      type="pwd"
+                      type="password"
                       id="pwd"
                       name="pwd"
                       className={`form-control ${errors.pwd && 'is-invalid'}`}

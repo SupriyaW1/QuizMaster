@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-
+import { Link, Outlet } from 'react-router-dom';
+//localStorage.setItem("page", "/login");
 export default function AdminHome() {
-  const { path } = useParams();
-
+//   const [name, setName] = useState("");
+//   useEffect(() => {
+//     const storedName = localStorage.getItem("name");
+//     setName(storedName || "");
+// }, []);
   return (
     <div>
       <h1>Welcome Admin</h1>
@@ -11,7 +13,7 @@ export default function AdminHome() {
         <div className="container-fluid">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="expertRegistration" className="nav-link px-3">Expert Registration</Link>
+              <Link to="expertRegistration" className="nav-link px-3">Create Expert</Link>
             </li>
             <li className="nav-item">
               <Link to="manageAccount" className="nav-link px-3">Manage Account</Link>
@@ -28,6 +30,7 @@ export default function AdminHome() {
           </ul>
         </div>
       </nav>
+      <Outlet/>
     </div>
   );
 }

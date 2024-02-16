@@ -1,5 +1,6 @@
 package com.quizmaster.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,11 +16,17 @@ public class Expert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int expert_id;
+	@Column
 	String fname;
+	@Column
 	String lname;
+	@Column
 	String qualification;
+	@Column
 	String subject;
+	@Column
 	String contact;
+	@Column
 	String email;
 	@OneToOne
 	@JoinColumn(name = "uid")
@@ -29,8 +36,6 @@ public class Expert {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public Expert(String fname, String lname, String qualification, String subject, String contact, String email,
 			User uid) {
@@ -43,8 +48,6 @@ public class Expert {
 		this.email = email;
 		this.uid = uid;
 	}
-
-
 
 	public int getExpert_id() {
 		return expert_id;
@@ -105,7 +108,7 @@ public class Expert {
 	@Override
 	public String toString() {
 		return "Expert [expert_id=" + expert_id + ", fname=" + fname + ", lname=" + lname + ", qualification="
-				+ qualification + ", subject=" + subject + ", contact=" + contact +  ", uid=" + uid + "]";
+				+ qualification + ", subject=" + subject + ", contact=" + contact + ", uid=" + uid + "]";
 	}
 
 }

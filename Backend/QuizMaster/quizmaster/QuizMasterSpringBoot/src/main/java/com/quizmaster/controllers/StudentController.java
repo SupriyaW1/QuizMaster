@@ -1,15 +1,20 @@
 package com.quizmaster.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizmaster.dummy.StudentRegistrationDummy;
+import com.quizmaster.entities.Question;
 import com.quizmaster.entities.Role;
 import com.quizmaster.entities.Student;
 import com.quizmaster.entities.User;
+import com.quizmaster.services.QuestionService;
 import com.quizmaster.services.RoleService;
 import com.quizmaster.services.StudentService;
 import com.quizmaster.services.UserService;
@@ -23,7 +28,8 @@ public class StudentController {
     RoleService rService;
 	@Autowired
 	UserService uService;
-	
+	@Autowired 
+	QuestionService qService;
 	@PostMapping("/studentRegistration")
 	public Student saveStudent(@RequestBody StudentRegistrationDummy dummy)
 	{
@@ -33,5 +39,10 @@ public class StudentController {
 	    Student student=new Student(dummy.getSid(),dummy.getFname(),dummy.getLname(),dummy.getBdate(),dummy.getEducation(),dummy.getContact(),dummy.getEmail(),dummy.getSubscription(),user);
 	 System.out.println(student);
 	    return sService.saveStudent(student);
+	}
+	@GetMapping("/attemptQuiz")
+	public List<Question> getQuestions()
+	{
+		return qService.getQuestions();
 	}
 }

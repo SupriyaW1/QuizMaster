@@ -30,9 +30,11 @@ public class ExpertController {
 		Role role = rService.getRole(4);
 
 		User user = new User(expert.getUname(), expert.getPwd(), role, true);
-	    uService.save(user);
-       
-	    Expert  exp=new Expert(expert.getFname(),expert.getLname(),expert.getQualification(),expert.getSubject(),expert.getContact(),expert.getEmail(),user);
+		uService.save(user);
+
+		Expert exp = new Expert(expert.getFname(), expert.getLname(), expert.getQualification(), expert.getSubject(),
+				expert.getContact(), expert.getEmail(), user);
 		return eService.saveExpert(exp);
 	}
+
 }

@@ -18,6 +18,7 @@ root.render(
   </React.StrictMode>
   </BrowserRouter>
   </Provider>
+  
 );
 
 reportWebVitals();

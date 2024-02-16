@@ -1,5 +1,6 @@
 package com.quizmaster.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,6 +12,7 @@ public class Role {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int role_id;
+	@Column
 	String role_name;
 	
 	public int getRole_id() {

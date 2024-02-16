@@ -2,6 +2,7 @@ package com.quizmaster.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int sid;
 	String fname;
+	@Column
 	String lname;
     Date bdate;
 	String education;
