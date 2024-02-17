@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizmaster.entities.Expert;
@@ -30,4 +31,8 @@ public class AdminController {
         }
 		return aService.getAllExperts();
 	}
+//	@GetMapping("/getAdminById")
+//	public Expert getExpertById(@RequestParam("uid") int id) {
+//		return aService.getExpertById(id);
+//	}
 }

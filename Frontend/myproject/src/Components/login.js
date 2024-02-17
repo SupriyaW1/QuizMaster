@@ -52,21 +52,21 @@ export default function Login() {
           reduxAction(login())
         if (data && data.role_id) {
           if (data.role_id.role_id === 1) {
-          //  localStorage.setItem("name", data.username);
+           localStorage.setItem("name", JSON.stringify(data));
             navigate("/adminHome");
             myaction(login());
           }
           else if (data.role_id.role_id === 2) {
             console.log("valid ");
             console.log("after dispatch");
-            //localStorage.setItem("name", data.username);
+            localStorage.setItem("name", JSON.stringify(data));
             navigate("/studentHome");
             myaction(login());
           }
           else if (data.role_id.role_id === 4) {
             console.log("valid ");
             console.log("after dispatch");
-            localStorage.setItem("name", data.username);
+            localStorage.setItem("name", JSON.stringify(data));
             navigate("/expertHome");
             myaction(login());
           }

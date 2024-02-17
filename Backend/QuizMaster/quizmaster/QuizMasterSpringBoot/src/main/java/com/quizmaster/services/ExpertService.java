@@ -16,4 +16,8 @@ public class ExpertService {
 		return expertRepo.save(expert);
 	}
 
+	public Expert getExpertByuid(int id) {
+		return expertRepo.getExpertByUid(id);
+	}
+
 }

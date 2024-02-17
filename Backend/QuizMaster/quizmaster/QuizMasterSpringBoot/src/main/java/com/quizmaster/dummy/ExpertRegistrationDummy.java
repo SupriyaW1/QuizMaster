@@ -9,7 +9,7 @@ public class ExpertRegistrationDummy {
 	String contact;
 	String pwd;
 	String uname;
-	int uid;
+	int user;
 
 	public ExpertRegistrationDummy() {
 		super();
@@ -26,7 +26,7 @@ public class ExpertRegistrationDummy {
 		this.contact = contact;
 		this.pwd = pwd;
 		this.uname = uname;
-		this.uid = uid;
+		this.user = uid;
 	}
 
 	public String getFname() {
@@ -94,18 +94,18 @@ public class ExpertRegistrationDummy {
 	}
 
 	public int getUid() {
-		return uid;
+		return user;
 	}
 
 	public void setUid(int uid) {
-		this.uid = uid;
+		this.user = uid;
 	}
 
 	@Override
 	public String toString() {
 		return "ExpertRegistrationDummy [fname=" + fname + ", lname=" + lname + ", subject=" + subject
 				+ ", qualification=" + qualification + ", email=" + email + ", contact=" + contact + ", pwd=" + pwd
-				+ ", uname=" + uname + ", uid=" + uid + "]";
+				+ ", uname=" + uname + ", user=" + user + "]";
 	}
    
 }

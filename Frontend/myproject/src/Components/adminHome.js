@@ -1,11 +1,9 @@
 import { Link, Outlet } from 'react-router-dom';
-//localStorage.setItem("page", "/login");
+//import { login } from './slice';
+
 export default function AdminHome() {
-//   const [name, setName] = useState("");
-//   useEffect(() => {
-//     const storedName = localStorage.getItem("name");
-//     setName(storedName || "");
-// }, []);
+
+
   return (
     <div>
       <h1>Welcome Admin</h1>

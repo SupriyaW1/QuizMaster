@@ -30,11 +30,27 @@ public class Expert {
 	String email;
 	@OneToOne
 	@JoinColumn(name = "uid")
-	User uid;
+	User user;
 
 	public Expert() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Expert(String fname, String lname, String qualification, String subject, String contact, String email,
@@ -46,7 +62,7 @@ public class Expert {
 		this.subject = subject;
 		this.contact = contact;
 		this.email = email;
-		this.uid = uid;
+		this.user = uid;
 	}
 
 	public int getExpert_id() {
@@ -97,18 +113,10 @@ public class Expert {
 		this.contact = contact;
 	}
 
-	User getUid() {
-		return uid;
-	}
-
-	public void setUid(User uid) {
-		this.uid = uid;
-	}
-
 	@Override
 	public String toString() {
 		return "Expert [expert_id=" + expert_id + ", fname=" + fname + ", lname=" + lname + ", qualification="
-				+ qualification + ", subject=" + subject + ", contact=" + contact + ", uid=" + uid + "]";
+				+ qualification + ", subject=" + subject + ", contact=" + contact + ", user=" + user + "]";
 	}
 
 }

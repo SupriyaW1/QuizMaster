@@ -1,5 +1,6 @@
 package com.quizmaster.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int uid;
+	@Column
 	String uname;
+	@Column
 	String pwd;
 	
 	@ManyToOne

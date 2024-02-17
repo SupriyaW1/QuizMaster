@@ -1,5 +1,6 @@
 package com.quizmaster.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +15,20 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int qid;
+	@Column
 	String question_text;
+	@Column
 	String option1;
+	@Column
 	String option2;
+	@Column
 	String option3;
+	@Column
 	String option4;
+	@Column
 	int answer;
-	String explaination;
+	@Column
+	String explanation;
 	@OneToOne
 	@JoinColumn(name = "subject_id")
 	Subject subject_id;
@@ -85,11 +93,11 @@ public class Question {
 	}
 
 	public String getExplaination() {
-		return explaination;
+		return explanation;
 	}
 
 	public void setExplaination(String explaination) {
-		this.explaination = explaination;
+		this.explanation = explaination;
 	}
 
 	public Subject getSubject_id() {
@@ -122,7 +130,7 @@ public class Question {
 		this.option3 = option3;
 		this.option4 = option4;
 		this.answer = answer;
-		this.explaination = explaination;
+		this.explanation = explaination;
 		this.subject_id = subject_id;
 		this.cat_id = cat_id;
 	}
@@ -130,8 +138,8 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Quetion [qid=" + qid + ", question_text=" + question_text + ", option1=" + option1 + ", option2="
-				+ option2 + ", option3=" + option3 + ", option4=" + option4 + ", answer=" + answer + ", explaination="
-				+ explaination + ", subject_id=" + subject_id + ", cat_id=" + cat_id + "]";
+				+ option2 + ", option3=" + option3 + ", option4=" + option4 + ", answer=" + answer + ", explanation="
+				+ explanation + ", subject_id=" + subject_id + ", cat_id=" + cat_id + "]";
 	}
 
 }

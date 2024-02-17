@@ -9,6 +9,7 @@ import ExpertHome from './components/ExpertHome';
 import ManageAccount from './components/ManageAccount';
 import CreateQuizCategories from './components/CreateQuizCategories';
 import AddQuiz from './components/AddQuiz';
+import ViewQuiz from './ViewQuiz';
 
 function App() {
   const logstate = useSelector(state => state.logged)
@@ -38,8 +39,9 @@ function App() {
           <Route path="addQuizzes" element={<AddQuiz />} /> 
     </Route>
     <Route path="/logout" element={<Logout/>}></Route>
-    <Route path="/expertHome" element={<ExpertHome/>}></Route>
-
+    <Route path="/expertHome" element={<ExpertHome/>}>
+      <Route path="viewQuiz" element={<ViewQuiz/>}/>
+    </Route>
     </Routes>
    
  </div>

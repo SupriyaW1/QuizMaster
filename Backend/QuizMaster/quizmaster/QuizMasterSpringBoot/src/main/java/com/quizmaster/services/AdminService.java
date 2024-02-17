@@ -16,5 +16,8 @@ public class AdminService {
 	public List<Expert> getAllExperts() {
 		return adminRepo.findAll();
 	}
+//	public Expert getExpertById(int id) {
+//		return adminRepo.findById(id).get();
+//	}
 
 }

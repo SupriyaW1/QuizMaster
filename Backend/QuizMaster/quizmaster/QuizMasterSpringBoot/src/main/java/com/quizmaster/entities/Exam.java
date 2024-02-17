@@ -2,6 +2,7 @@ package com.quizmaster.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,9 @@ public class Exam {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int exam_id;
+	@Column
 	Timestamp attempted_datetime;
+	@Column
 	int marks;
 	@ManyToOne
 	@JoinColumn(name = "sid")
