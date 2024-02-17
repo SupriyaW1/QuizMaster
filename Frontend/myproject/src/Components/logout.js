@@ -10,3 +10,4 @@ export default function Logout() {
     const mystate = useSelector(state=>state.logged);
     navigate("/login");
 }
+

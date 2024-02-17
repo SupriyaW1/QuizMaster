@@ -48,8 +48,8 @@ export default function Login() {
     fetch("http://localhost:8080/login", reqOptions)
       .then((res) => res.json()) 
       .then((data) => {
-        setInfo(data);
-          reduxAction(login())
+        setInfo("");
+        reduxAction(login());
         if (data && data.role_id) {
           if (data.role_id.role_id === 1) {
             navigate("/adminHome");
@@ -67,13 +67,14 @@ export default function Login() {
             navigate("/expertHome");
             myaction(login());
           }
-        } 
-        
+        } else {
+          setInfo("Invalid Credentials");
+        }
       })
       .catch(error=>{
           console.error("Error fetching data",error);
-          setInfo("Invalid Credentials")
-      })
+          setInfo("Invalid Credentials");
+      });
   };
 
   return (
@@ -150,10 +151,10 @@ export default function Login() {
               />
             </div>
           </form>
+          <h1 className="text-danger mt-3">{info}</h1> {/* Display invalid credentials message */}
         </div>
         <div className="col"></div>
       </div>
-      <h1> {info} </h1>
     </div>
   );
 }

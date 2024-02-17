@@ -8,14 +8,14 @@ export const loggedSlice = createSlice({
   reducers: {
     login: (state) => {
       console.log("loggedin");
-      return { loggedIn: true };
+      return { loggedIn: true }
     },
 
     logout: (state) => {
       console.log("loggedout");
-      return { loggedIn: false };
-    },
-  },
-});
-export const { login, logout } = loggedSlice.actions;
-export default loggedSlice.reducer;
+      return { loggedIn: false }
+    }
+  }
+})
+export const { login, logout } = loggedSlice.actions
+export default loggedSlice.reducer

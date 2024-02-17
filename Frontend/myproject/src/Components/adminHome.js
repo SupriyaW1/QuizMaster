@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 export default function AdminHome() {
   const { path } = useParams();
@@ -28,6 +28,7 @@ export default function AdminHome() {
           </ul>
         </div>
       </nav>
+      <Outlet/>
     </div>
   );
 }
