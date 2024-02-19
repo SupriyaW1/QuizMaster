@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "categories")
-public class Catagory {
+public class Category {
 	@Id
 	int cat_id;
 	@Column
@@ -29,12 +29,12 @@ public class Catagory {
 		this.cat_name = cat_name;
 	}
 
-	public Catagory() {
+	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Catagory(String cat_name) {
+	public Category(String cat_name) {
 		super();
 		this.cat_name = cat_name;
 	}

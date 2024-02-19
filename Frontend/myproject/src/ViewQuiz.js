@@ -36,7 +36,7 @@
               <td>{questions.option3}</td>
               <td>{questions.option4}</td>
               <td>{questions.answer}</td>
-              <td>{questions.explanation}</td>
+              <td>{questions.explaination}</td>
             </tr>
           ))}
         </tbody>

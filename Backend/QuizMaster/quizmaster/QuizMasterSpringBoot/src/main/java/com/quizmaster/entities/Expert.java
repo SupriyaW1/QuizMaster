@@ -23,14 +23,15 @@ public class Expert {
 	@Column
 	String qualification;
 	@Column
-	String subject;
-	@Column
 	String contact;
 	@Column
 	String email;
 	@OneToOne
 	@JoinColumn(name = "uid")
 	User user;
+	@OneToOne
+	@JoinColumn(name = "subject_id")
+	Subject subject_id;
 
 	public Expert() {
 		super();
@@ -51,18 +52,6 @@ public class Expert {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Expert(String fname, String lname, String qualification, String subject, String contact, String email,
-			User uid) {
-		super();
-		this.fname = fname;
-		this.lname = lname;
-		this.qualification = qualification;
-		this.subject = subject;
-		this.contact = contact;
-		this.email = email;
-		this.user = uid;
 	}
 
 	public int getExpert_id() {
@@ -97,14 +86,6 @@ public class Expert {
 		this.qualification = qualification;
 	}
 
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
 	public String getContact() {
 		return contact;
 	}
@@ -113,10 +94,31 @@ public class Expert {
 		this.contact = contact;
 	}
 
+	public Expert(String fname, String lname, String qualification, String contact, String email, User user,
+			Subject subject_id) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.qualification = qualification;
+		this.contact = contact;
+		this.email = email;
+		this.user = user;
+		this.subject_id = subject_id;
+	}
+
+	public Subject getSubject_id() {
+		return subject_id;
+	}
+
+	public void setSubject_id(Subject subject_id) {
+		this.subject_id = subject_id;
+	}
+
 	@Override
 	public String toString() {
 		return "Expert [expert_id=" + expert_id + ", fname=" + fname + ", lname=" + lname + ", qualification="
-				+ qualification + ", subject=" + subject + ", contact=" + contact + ", user=" + user + "]";
+				+ qualification + ", contact=" + contact + ", email=" + email + ", user=" + user + ", subject_id="
+				+ subject_id + "]";
 	}
 
 }

@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quizmaster.entities.Catagory;
+import com.quizmaster.dummy.AddQuetionDummy;
+import com.quizmaster.entities.Category;
 import com.quizmaster.entities.Question;
 import com.quizmaster.entities.Subject;
 import com.quizmaster.services.CategoryService;
@@ -23,16 +24,15 @@ public class QuestionController {
 	@Autowired
 	CategoryService catService;
 
-//	@PostMapping("/addQuestion")
-//	public Question addQuestion(@RequestBody Question question) {
-//		Subject subject = subService.getSubject();
-//		System.out.println(subject);
-//		Catagory catagory = catService.getCategory();
-//		System.out.println(catagory);
-//		Question que = new Question(question.getQuestion_text(), question.getOption1(), question.getOption2(),
-//				question.getOption3(), question.getOption4(), question.getAnswer(), question.getExplaination(), subject,
-//				catagory);
-//		System.out.println(que);
-//		return queService.addQuetion(que);
-//	}
+	@PostMapping("/addQuestion")
+	public Question addQuestion(@RequestBody AddQuetionDummy question) {
+		Subject subject =subService.getSubject(1);
+		Category catagory = catService.getCategory(question.getCat_id());
+		System.out.println(catagory);
+		Question que = new Question(question.getQuestion_text(), question.getOption1(), question.getOption2(),
+				question.getOption3(), question.getOption4(), question.getAnswer(), question.getExplaination(), subject,
+				catagory);
+		System.out.println(que);
+		return queService.addQuetion(que);
+	}
 }

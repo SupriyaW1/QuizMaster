@@ -24,7 +24,7 @@ export default function ExpertHome() {
             <Link to="updateAccount" className="nav-link px-3">Update Account</Link>
           </li>  
           <li className="nav-item">
-            <Link to="addQuizzes" className="nav-link px-3">Add Quizzes</Link>
+            <Link to="addQuestion" className="nav-link px-3">Add Question</Link>
           </li>
           <li className="nav-item">
             <Link to="viewQuiz" className="nav-link px-3">View Quizzes</Link>

@@ -34,7 +34,7 @@ public class Exam {
 	Subject subject_id;
 	@OneToOne
 	@JoinColumn(name = "cat_id")
-	Catagory cat_id;
+	Category cat_id;
 
 	public int getExam_id() {
 		return exam_id;
@@ -76,11 +76,11 @@ public class Exam {
 		this.subject_id = subject_id;
 	}
 
-	public Catagory getCat_id() {
+	public Category getCat_id() {
 		return cat_id;
 	}
 
-	public void setCat_id(Catagory cat_id) {
+	public void setCat_id(Category cat_id) {
 		this.cat_id = cat_id;
 	}
 
@@ -89,7 +89,7 @@ public class Exam {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Exam(Timestamp attempted_datetime, int marks, Student sid, Subject subject_id, Catagory cat_id) {
+	public Exam(Timestamp attempted_datetime, int marks, Student sid, Subject subject_id, Category cat_id) {
 		super();
 		this.attempted_datetime = attempted_datetime;
 		this.marks = marks;

@@ -34,7 +34,7 @@ public class Question {
 	Subject subject_id;
 	@OneToOne
 	@JoinColumn(name = "cat_id")
-	Catagory cat_id;
+	Category cat_id;
 
 	public int getQid() {
 		return qid;
@@ -108,11 +108,11 @@ public class Question {
 		this.subject_id = subject_id;
 	}
 
-	public Catagory getCat_id() {
+	public Category getCat_id() {
 		return cat_id;
 	}
 
-	public void setCat_id(Catagory cat_id) {
+	public void setCat_id(Category cat_id) {
 		this.cat_id = cat_id;
 	}
 
@@ -122,7 +122,7 @@ public class Question {
 	}
 
 	public Question(String question_text, String option1, String option2, String option3, String option4, int answer,
-			String explaination, Subject subject_id, Catagory cat_id) {
+			String explaination, Subject subject_id, Category cat_id) {
 		super();
 		this.question_text = question_text;
 		this.option1 = option1;
@@ -134,6 +134,7 @@ public class Question {
 		this.subject_id = subject_id;
 		this.cat_id = cat_id;
 	}
+
 
 	@Override
 	public String toString() {

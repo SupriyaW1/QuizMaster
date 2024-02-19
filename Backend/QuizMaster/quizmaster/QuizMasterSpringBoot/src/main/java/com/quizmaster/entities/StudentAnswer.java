@@ -1,5 +1,6 @@
 package com.quizmaster.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +13,13 @@ public class StudentAnswer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int answer_id;
+	@Column
 	int student_answer;
+	@Column
 	int exam_id;
+	@Column
 	int qid;
+	@Column
 	int sid;
 
 	public StudentAnswer() {
