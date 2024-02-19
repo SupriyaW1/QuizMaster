@@ -1,5 +1,7 @@
 package com.quizmaster.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class SubjectService {
 
 	public Subject getSubject(int subject_id) {
 		return subjectRepo.findById(subject_id).get();
+	}
+
+	public List<Subject> getAllSubjects() {
+		return subjectRepo.findAll();
 	}
 
 }

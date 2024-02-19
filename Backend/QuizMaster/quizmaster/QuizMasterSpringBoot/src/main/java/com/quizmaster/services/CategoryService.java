@@ -1,5 +1,6 @@
 package com.quizmaster.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class CategoryService {
 
 	public Category getCategory(int cat_id) {
 		return catRepo.findById(cat_id).get();
+	}
+
+	public List<Category> allCategories() {
+
+		return catRepo.findAll();
 	}
 
 //	public Category getCategory(int cat_id) {

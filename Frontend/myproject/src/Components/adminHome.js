@@ -19,9 +19,9 @@ export default function AdminHome() {
             <li className="nav-item">
               <Link to="createQuizCategories" className="nav-link px-3">Create Quiz Categories</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="addQuizzes" className="nav-link px-3">Add Quizzes</Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link to="/logout" className="nav-link px-3">Logout</Link>
             </li>

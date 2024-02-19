@@ -10,6 +10,7 @@ import ManageAccount from './components/ManageAccount';
 import CreateQuizCategories from './components/CreateQuizCategories';
 import AddQuiz from './components/AddQuiz';
 import ViewQuiz from './ViewQuiz';
+import AttemptQuiz from './components/AttemptQuiz';
 //import Home from './components/Home';
 
 function App() {
@@ -25,9 +26,12 @@ function App() {
         <li className="nav-item">
          <Link to={"/signup"} className="nav-link">Student Sign Up</Link> 
         </li>
-         <li className="nav-item">
-           <Link to={"/login"} className="nav-link">Log-In</Link>
-         </li>  
+        <li className="nav-item">
+          <Link to={"/login"} className="nav-link">Log-In</Link>
+        </li> 
+        <li className="nav-item">
+          <Link to={"/attemptQuiz"} className="nav-link">Attempt Quiz</Link>
+        </li>  
          
          
     </ul>
@@ -47,6 +51,8 @@ function App() {
       <Route path="viewQuiz" element={<ViewQuiz/>}/>
       <Route path="addQuestion" element={<AddQuiz/>}/>
     </Route>
+    <Route path="/attemptQuiz" element={<AttemptQuiz/>}></Route>
+
     </Routes>
    
  </div>
