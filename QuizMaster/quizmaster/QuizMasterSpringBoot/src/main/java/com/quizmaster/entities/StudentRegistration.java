@@ -74,6 +74,12 @@ public class StudentRegistration {
 	public void setSubscription(int subscription) {
 		this.subscription = subscription;
 	}
+	@Override
+	public String toString() {
+		return "StudentRegistration [sid=" + sid + ", uname=" + uname + ", pwd=" + pwd + ", fname=" + fname + ", lname="
+				+ lname + ", bdate=" + bdate + ", education=" + education + ", contact=" + contact + ", email=" + email
+				+ ", subscription=" + subscription + "]";
+	}
 	
 	
 

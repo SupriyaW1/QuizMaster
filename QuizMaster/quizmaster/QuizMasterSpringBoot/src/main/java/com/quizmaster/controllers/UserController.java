@@ -11,7 +11,7 @@ import com.quizmaster.entities.UserCheck;
 import com.quizmaster.services.UserService;
 
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 	
@@ -21,7 +21,7 @@ public class UserController {
 	@PostMapping("/login")
 	public User checkUser(@RequestBody UserCheck ucheck) {
 		
-	User	user= uservice.getUser(ucheck.getUname(),ucheck.getPwd());
+	User user= uservice.getUser(ucheck.getUname(),ucheck.getPwd());
 		System.out.println(user);
 		return user;
 	}
