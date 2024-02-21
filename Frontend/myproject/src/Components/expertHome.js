@@ -6,7 +6,7 @@ export default function ExpertHome() {
   const [expert,setExpert]=useState(null);
   useEffect(() => {
     const loginid= JSON.parse(localStorage.getItem("name")).uid;
-   // console.log(loginid);
+    //console.log("Loged user data"+loginid);
        fetch("http://localhost:8080/getExpertByUid?uid="+loginid)
        .then(resp=>resp.json())
        .then(obj=>{

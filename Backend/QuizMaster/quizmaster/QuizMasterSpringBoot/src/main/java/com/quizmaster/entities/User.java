@@ -44,12 +44,6 @@ public class User {
 		this.status = status;
 	}
 
-
-
-
-
-
-
 	public int getUid() {
 		return uid;
 	}

@@ -89,6 +89,16 @@ public class Exam {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
+	public Exam(Timestamp attempted_datetime, Student sid, Subject subject_id, Category cat_id) {
+		super();
+		this.attempted_datetime = attempted_datetime;
+		this.sid = sid;
+		this.subject_id = subject_id;
+		this.cat_id = cat_id;
+	}
+
 	public Exam(Timestamp attempted_datetime, int marks, Student sid, Subject subject_id, Category cat_id) {
 		super();
 		this.attempted_datetime = attempted_datetime;

@@ -2,8 +2,6 @@ import { Link, Outlet } from 'react-router-dom';
 //import { login } from './slice';
 
 export default function AdminHome() {
-
-
   return (
     <div>
       <h1>Welcome Admin</h1>
