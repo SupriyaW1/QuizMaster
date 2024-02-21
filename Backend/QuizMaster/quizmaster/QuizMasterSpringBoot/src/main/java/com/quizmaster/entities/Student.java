@@ -1,12 +1,14 @@
 package com.quizmaster.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -119,6 +121,9 @@ public class Student {
 	public void setUid(User uid) {
 		this.uid = uid;
 	}
+	@OneToMany(mappedBy = "sid")
+	private List<Exams> exams;
+
 
 	@Override
 	public String toString() {
@@ -128,6 +133,7 @@ public class Student {
 	}
 	
 	
+
 	
 	
 	
