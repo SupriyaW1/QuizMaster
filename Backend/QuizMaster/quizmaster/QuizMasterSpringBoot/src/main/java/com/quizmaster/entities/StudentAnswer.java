@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,24 +18,25 @@ public class StudentAnswer {
 	int answer_id;
 	@Column
 	int student_answer;
-	@Column
-	int exam_id;
-	@Column
-	int qid;
-	@Column
-	int sid;
+	@OneToOne
+	@JoinColumn(name = "exam_id")
+	Exam exam_id;
+	@OneToOne
+	@JoinColumn(name = "qid")
+	Question qid;
+	
 
 	public StudentAnswer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public StudentAnswer(int student_answer, int exam_id, int qid, int sid) {
+	public StudentAnswer(int student_answer, Exam exam_id, Question qid) {
 		super();
 		this.student_answer = student_answer;
 		this.exam_id = exam_id;
 		this.qid = qid;
-		this.sid = sid;
+		
 	}
 
 	public int getAnswer_id() {
@@ -51,34 +55,28 @@ public class StudentAnswer {
 		this.student_answer = student_answer;
 	}
 
-	public int getExam_id() {
+	public Exam getExam_id() {
 		return exam_id;
 	}
 
-	public void setExam_id(int exam_id) {
+	public void setExam_id(Exam exam_id) {
 		this.exam_id = exam_id;
 	}
 
-	public int getQid() {
+	public Question getQid() {
 		return qid;
 	}
 
-	public void setQid(int qid) {
+	public void setQid(Question qid) {
 		this.qid = qid;
 	}
 
-	public int getSid() {
-		return sid;
-	}
-
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "StudentAnswer [answer_id=" + answer_id + ", student_answer=" + student_answer + ", exam_id=" + exam_id
-				+ ", qid=" + qid + ", sid=" + sid + "]";
+				+ ", qid=" + qid +  "]";
 	}
 
 }

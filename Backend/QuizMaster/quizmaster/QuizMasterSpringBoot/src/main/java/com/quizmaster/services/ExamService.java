@@ -14,5 +14,8 @@ public class ExamService {
 	public Exam saveExam(Exam exam) {
 		return examRepo.save(exam);
 	}
+	public Exam findByEaxamid(int exam_id) {
+		return examRepo.findById(exam_id).get();
+	}
 
 }

@@ -36,4 +36,8 @@ public class QuestionService {
 		Subject subject = subjectRepository.findById(subject_id).get();
 		return queRepo.findBySubIdAndCatid(cat, subject);
 	}
+
+	public Question findByQid(int qid) {
+		return queRepo.findById(qid).get();
+	}
 }

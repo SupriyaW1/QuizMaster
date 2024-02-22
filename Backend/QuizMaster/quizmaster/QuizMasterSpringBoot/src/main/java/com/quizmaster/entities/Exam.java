@@ -108,4 +108,10 @@ public class Exam {
 		this.cat_id = cat_id;
 	}
 
+	@Override
+	public String toString() {
+		return "Exam [exam_id=" + exam_id + ", attempted_datetime=" + attempted_datetime + ", marks=" + marks + ", sid="
+				+ sid + ", subject_id=" + subject_id + ", cat_id=" + cat_id + "]";
+	}
+
 }
