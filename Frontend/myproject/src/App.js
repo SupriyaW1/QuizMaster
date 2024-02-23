@@ -6,7 +6,6 @@ import Signup from './components/Signup';
 import AdminHome from './components/AdminHome';
 import Logout from './components/Logout';
 import ManageAccount from './components/ManageAccount';
-import CreateQuizCategories from './components/CreateQuizCategories';
 import AddQuiz from './components/AddQuiz';
 import ViewQuiz from './components/ViewQuiz';
 import AttemptQuiz from './components/AttemptQuiz';
@@ -19,7 +18,10 @@ import StudentHome from './components/StudentHome';
 import ExpertHome from './components/ExpertHome';
 import ViewResults from './components/ViewResults';
 import GiveFeedback from './components/GiveFeedback';
-//import Home from './components/Home';
+import CreateQuizCategories from './components/CreateSubjectOrCategories';
+import Home from './components/Home';
+import GetStudents from './components/GetStudents';
+//import './App.css'
 
 function App() {
   const logstate = useSelector(state => state.logged)
@@ -41,7 +43,7 @@ function App() {
     </ul>
     </div>
     <Routes>
-    {/* <Route path="/" element={<Home/>}/> */}
+     <Route path="/" element={<Home/>}/> 
     <Route path="/signup" element={<Signup/>} />
     <Route path="/login" element={<Login/>}/>
     <Route path="/adminHome" element={<AdminHome/>}>
@@ -49,6 +51,7 @@ function App() {
        <Route path="manageAccount" element={<ManageAccount />} />
        <Route path="createQuizCategories" element={<CreateQuizCategories />} />
        <Route path="viewSubjects" element={<ViewSubjects />} />   
+       <Route path="getAllStudents" element={<GetStudents />} />   
     </Route>
     <Route path="/logout" element={<Logout/>}></Route>
     <Route path="/expertHome" element={<ExpertHome/>}>

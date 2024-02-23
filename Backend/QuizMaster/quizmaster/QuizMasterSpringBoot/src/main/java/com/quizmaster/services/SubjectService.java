@@ -22,4 +22,8 @@ public class SubjectService {
 		return subjectRepo.findAll();
 	}
 
+	public Subject addSubject(Subject subject) {
+		return subjectRepo.save(subject);
+	}
+
 }

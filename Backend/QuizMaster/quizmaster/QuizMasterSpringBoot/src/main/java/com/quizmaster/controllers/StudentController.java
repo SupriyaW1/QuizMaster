@@ -61,4 +61,5 @@ public class StudentController {
 		System.out.println(sService.getStudentByUid(id));
 		return sService.getStudentByUid(id);
 	}
+	
 }

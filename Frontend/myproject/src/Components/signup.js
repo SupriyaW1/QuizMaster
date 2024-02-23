@@ -268,7 +268,7 @@ export default function Signup() {
                 </div>
             </div>
 
-            <p> {JSON.stringify(students)}</p>
+            {/* <p> {JSON.stringify(students)}</p> */}
             <h1> {insertMsg} </h1>
         </div>
     );

@@ -25,7 +25,7 @@ export default function StudentHome() {
               <Link to="updateAccount" className="nav-link px-3">Update Account</Link>
             </li>
             <li className="nav-item">
-              <Link to="attemptQuiz" className="nav-link px-3">Attempt Quizze</Link>
+              <Link to="attemptQuiz" className="nav-link px-3">Attempt Quizz</Link>
             </li>
             <li className="nav-item">
               <Link to="viewResults" className="nav-link px-3">View Results</Link>
@@ -33,9 +33,15 @@ export default function StudentHome() {
             <li className="nav-item">
               <Link to="giveFeedback" className="nav-link px-3">Give Feedback</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="makeSubscription" className="nav-link px-3">Make Subscription</Link>
-            </li>
+            </li> */}
+             {/* Conditionally render the "Make Subscription" link */}
+             {student && !student.subscription && (
+              <li className="nav-item">
+                <Link to="makeSubscription" className="nav-link px-3">Make Subscription</Link>
+              </li>
+            )}
             <li className="nav-item">
               <Link to="/logout" className="nav-link px-3">Logout</Link>
             </li>

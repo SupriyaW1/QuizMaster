@@ -4,7 +4,6 @@ export default function ManageAccount() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Fetch users from the Spring API
     fetch("http://localhost:8080/getAllUsers")
       .then(response => {
         if (!response.ok) {
@@ -13,29 +12,13 @@ export default function ManageAccount() {
         return response.json();
       })
       .then(data => {
+        console.log("Fetched users:", data); 
         setUsers(data);
       })
       .catch(error => {
         console.error('Error fetching users:', error);
       });
   }, []);
-
- // console.log(user.uid);
-  const deleteUser = (userId) => {
-    fetch(`/deleteUser/${userId}`, {
-      method: 'DELETE'
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to delete user');
-      }
-      // Update users state after successful deletion
-      setUsers(users.filter(user => user.uid !== userId));
-    })
-    .catch(error => {
-      console.error('Error deleting user:', error);
-    });
-  };
 
   return (
     <div className="container mt-4">
@@ -46,29 +29,46 @@ export default function ManageAccount() {
             <th scope="col">User ID</th>
             <th scope="col">Username</th>
             <th scope="col">Password</th>
-            <th scope="col">Role ID</th>
             <th scope="col">Role</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Status</th>
+            <th scope="col">Activate</th>
+            <th scope="col">Deactivate</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
-            <tr key={user.uid}>
-              <td>{user.uid}</td>
-              <td>{user.uname}</td>
-              <td>{user.pwd}</td>
-              <td>{user.role_id.role_id}</td> {/* Modify this line */}
-              <td>
-                {user.role_id.role_id === 1 && <span>Admin</span>}
-                {user.role_id.role_id === 2 && <span>Student</span>}
-                {user.role_id.role_id === 3 && <span>Subscribed Student</span>}
-                {user.role_id.role_id === 4 && <span>Expert</span>}
-              </td>
-              <td>
-                <button className="btn btn-danger ml-2" onClick={() => deleteUser(user.uid)}>Delete</button>
-              </td>
-            </tr>
-          ))}
+          {users.map(user => {
+            console.log("User status:", user.status); 
+            return (
+              <tr key={user.uid}>
+                <td>{user.uid}</td>
+                <td>{user.uname}</td>
+                <td>{user.pwd}</td>
+                <td>
+                  {user.role_id.role_id === 1 && <span >Admin</span>}
+                  {user.role_id.role_id === 2 && <span >Student</span>}
+                  {user.role_id.role_id === 3 && <span >Subscribed Student</span>}
+                  {user.role_id.role_id === 4 && <span >Expert</span>}
+                </td>
+                <td>
+                  {user.status ? "1" : "0"}
+                </td>
+                <td>
+                  {user.status ? (
+                    <button className="btn btn-success ml-2" disabled>Activate</button>
+                  ) : (
+                    <button className="btn btn-success ml-2" >Activate</button>
+                  )}
+                </td>
+                <td>
+                  {user.status ? (
+                    <button className="btn btn-danger ml-2">Deactivate</button>
+                  ) : (
+                    <button className="btn btn-danger ml-2" disabled>Deactivate</button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
