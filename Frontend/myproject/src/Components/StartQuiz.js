@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StartQuiz = () => {
     const [quizData, setQuizData] = useState([]);
@@ -6,6 +7,7 @@ const StartQuiz = () => {
     const [markedForReview, setMarkedForReview] = useState([]);
     const [examStarted, setExamStarted] = useState(true);
     const [answers,setAnswers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchQuizData();
@@ -118,6 +120,7 @@ const savedAnswers = Object.keys(localStorage)
         .then(response => {
             if (response.ok) {
                 console.log('Student answers submitted successfully.');
+                navigate("/studentHome");
             } else {
                 console.error('Failed to submit student answers.');
             }

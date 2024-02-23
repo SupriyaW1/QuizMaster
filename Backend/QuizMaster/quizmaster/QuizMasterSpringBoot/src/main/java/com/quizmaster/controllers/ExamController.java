@@ -1,16 +1,15 @@
 package com.quizmaster.controllers;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import org.apache.naming.java.javaURLContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.ExtensionAwareQueryMethodEvaluationContextProvider;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizmaster.dummy.ExamDummy;
@@ -44,4 +43,15 @@ public class ExamController {
 	    Exam  exam = new Exam(cdate,student,subject,category);
 		return eService.saveExam(exam);
 	}
+	@GetMapping("viewResultByStudentId")
+	public List<Exam> viewResult(@RequestParam("sid") int sid)
+	{
+		Student student=studentService.getStudentBysid(sid);
+		//System.out.println(student);
+		List<Exam> exams=eService.findExamByStudent(student);
+		//System.out.println(exams);		
+		return exams;
+		
+	}
+	
 }

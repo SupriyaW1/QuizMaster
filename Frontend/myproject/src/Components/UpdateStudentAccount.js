@@ -75,7 +75,7 @@ export default function UpdateStudentAccount() {
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Birth Date:</label>
             <div className="col-sm-10">
-              <input  className="form-control" name="bdate" value={editableFields.bdate} onChange={handleInputChange} readOnly/>
+              <input  className="form-control" name="bdate" value={editableFields.bdate.substring(0, 10)} onChange={handleInputChange} readOnly/>
             </div>
           </div>
           <div className="form-group row">

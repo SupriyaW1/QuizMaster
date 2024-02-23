@@ -52,10 +52,9 @@ public class StudentAnswerController {
 	}*/
 	@PostMapping("/saveStudentAnswers")
 	public int saveStudentAnswers(@RequestBody StudentAnswerDummy dummyList) {
-		System.out.println(dummyList);
+		//System.out.println(dummyList);
 		List<AnswerList> answers=dummyList.getAnswers();
-		System.out.println(answers);
-		//ArrayList<StudentAnswer> studAnswers = new ArrayList<>();
+		//System.out.println(answers);
 	    Exam exam = null;
 	    Question question = null;
 	    StudentAnswer studentAnswer = null;
@@ -72,8 +71,6 @@ public class StudentAnswerController {
 	    return eService.updateResult(answers.get(0).getExam_id(), result);
 	    
 	    
-	    //return sAnswerService.saveStudentAnswers(studAnswers);
-		//return null;
 	}
 	
 	@GetMapping("getAnswersByExamId")

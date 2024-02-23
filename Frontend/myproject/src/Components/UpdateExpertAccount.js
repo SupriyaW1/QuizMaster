@@ -38,7 +38,7 @@ export default function UpdateExpertAccount() {
 
   const handleUpdate = () => {
     // Update expert details
-    // You can implement the update logic here
+    //  update logic here
     console.log("Updated expert details:", editableFields);
   };
 

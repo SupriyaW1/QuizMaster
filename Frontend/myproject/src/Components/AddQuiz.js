@@ -139,7 +139,7 @@ return (
             </div>
             <div className="form-group">
               <label htmlFor="answer">Answer:</label>
-              <input type="number" className="form-control" id="answer" name="answer" value={questions.answer.value} onChange={handleChange} />
+              <input type="number" min="1" max="4" className="form-control" id="answer" name="answer" value={questions.answer.value} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label htmlFor="explaination">Explaination:</label>
@@ -158,7 +158,7 @@ return (
           </div>
       </div>
 
-      <p> {JSON.stringify(questions)}</p>
+     { /*<p> {JSON.stringify(questions)}</p>*/}
       <h1> {insertMsg} </h1>
   </div>
 );

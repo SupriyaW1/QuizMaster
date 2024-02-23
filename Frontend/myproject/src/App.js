@@ -5,18 +5,20 @@ import { useSelector } from 'react-redux';
 import Signup from './components/Signup';
 import AdminHome from './components/AdminHome';
 import Logout from './components/Logout';
-import ExpertHome from './components/ExpertHome';
 import ManageAccount from './components/ManageAccount';
 import CreateQuizCategories from './components/CreateQuizCategories';
 import AddQuiz from './components/AddQuiz';
 import ViewQuiz from './components/ViewQuiz';
 import AttemptQuiz from './components/AttemptQuiz';
-import StudentHome from './components/StudentHome';
 import StartQuiz from './components/StartQuiz';
 import ViewSubjects from './components/ViewSubjects';
 import UpdateExpertAccount from './components/UpdateExpertAccount';
 import UpdateStudentAccount from './components/UpdateStudentAccount';
 import MakeSubscription from './components/MakeSubscription';
+import StudentHome from './components/StudentHome';
+import ExpertHome from './components/ExpertHome';
+import ViewResults from './components/ViewResults';
+import GiveFeedback from './components/GiveFeedback';
 //import Home from './components/Home';
 
 function App() {
@@ -56,8 +58,10 @@ function App() {
     </Route>
     <Route path="/studentHome" element={<StudentHome/>}>
       <Route path="attemptQuiz" element={<AttemptQuiz/>}></Route>
+      <Route path="viewResults" element={<ViewResults/>}></Route>
       <Route path="updateAccount" element={<UpdateStudentAccount/>}></Route>
       <Route path="startQuiz" element={<StartQuiz/>}></Route>
+      <Route path="giveFeedback" element={<GiveFeedback/>}></Route>
       <Route path="makeSubscription" element={<MakeSubscription/>}></Route>
     </Route>
 

@@ -27,6 +27,10 @@ public class StudentService {
 		return srepo.findById(sid).get();
 	}
 
+	public Student getStudentBysid(int sid) {
+		return srepo.findById(sid).get();
+	}
+
 	
 
 }

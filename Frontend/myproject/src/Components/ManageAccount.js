@@ -20,8 +20,8 @@ export default function ManageAccount() {
       });
   }, []);
 
+ // console.log(user.uid);
   const deleteUser = (userId) => {
-    // Implement delete user functionality
     fetch(`/deleteUser/${userId}`, {
       method: 'DELETE'
     })
