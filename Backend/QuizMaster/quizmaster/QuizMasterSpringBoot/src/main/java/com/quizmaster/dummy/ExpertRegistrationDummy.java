@@ -3,7 +3,7 @@ package com.quizmaster.dummy;
 public class ExpertRegistrationDummy {
 	String fname;
 	String lname;
-	String subject;
+	int subject;
 	String qualification;
 	String email;
 	String contact;
@@ -15,7 +15,7 @@ public class ExpertRegistrationDummy {
 		super();
 	}
 
-	public ExpertRegistrationDummy(String fname, String lname, String subject, String qualification, String email,
+	public ExpertRegistrationDummy(String fname, String lname, int subject, String qualification, String email,
 			String contact, String pwd, String uname, int uid) {
 		super();
 		this.fname = fname;
@@ -45,11 +45,11 @@ public class ExpertRegistrationDummy {
 		this.lname = lname;
 	}
 
-	public String getSubject() {
+	public int getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(int subject) {
 		this.subject = subject;
 	}
 

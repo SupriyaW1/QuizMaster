@@ -2,21 +2,22 @@ package com.quizmaster.dummy;
 
 import java.util.List;
 
-import com.quizmaster.entities.StudentAnswer;
+import com.quizmaster.entities.AnswerList;
+
 
 public class StudentAnswerDummy {
 
-	 List<StudentAnswer> answers;
+	List<AnswerList> answers;
 
-	public List<StudentAnswer> getAnswers() {
+	public List<AnswerList> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(List<StudentAnswer> answers) {
+	public void setAnswers(List<AnswerList> answers) {
 		this.answers = answers;
 	}
 
-	public StudentAnswerDummy(List<StudentAnswer> answers) {
+	public StudentAnswerDummy(List<AnswerList> answers) {
 		super();
 		this.answers = answers;
 	}

@@ -5,6 +5,7 @@ const StartQuiz = () => {
     const [selectedAnswers, setSelectedAnswers] = useState([]);
     const [markedForReview, setMarkedForReview] = useState([]);
     const [examStarted, setExamStarted] = useState(true);
+    const [answers,setAnswers] = useState([]);
 
     useEffect(() => {
         fetchQuizData();
@@ -83,6 +84,25 @@ Object.keys(localStorage).forEach(key => {
     }
 });*/}
 
+ /*const addAnswers = (id,ans) => {
+      let ans_arr = answers;
+      ans_arr.push({qid: id, answer: ans});
+      setAnswers(ans_arr);
+ }
+
+ const handleSubmit = () => {
+      const reqoptions = {
+        method: "POST",
+        headers: {
+            'content-type':'application/json'
+        },
+        body: JSON.stringify({
+            examid: exam.exam_id,
+            answers: answers
+        })
+      }
+ } */
+
 const savedAnswers = Object.keys(localStorage)
     .filter(key => key.startsWith('selected_answer_'))
     .map(key => JSON.parse(localStorage.getItem(key)));
@@ -93,7 +113,7 @@ const savedAnswers = Object.keys(localStorage)
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({savedAnswers})
+        body: JSON.stringify({answers: savedAnswers})
     })
         .then(response => {
             if (response.ok) {
@@ -111,6 +131,7 @@ const savedAnswers = Object.keys(localStorage)
         <div className="container">
             {examStarted && (
                 <div>
+                    <h3>Answer all questions before submitting.</h3>
                     {quizData && quizData.map((question, index) => (
                         <div key={question.qid} className={`question-container mt-3 ${markedForReview[index] ? 'marked-for-review' : ''}`}>
                             <p className="question">{`Question ${index + 1}: ${question.question_text}`}</p>

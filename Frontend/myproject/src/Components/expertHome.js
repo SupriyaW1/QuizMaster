@@ -21,7 +21,7 @@ export default function ExpertHome() {
       <div className="container-fluid">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="updateAccount" className="nav-link px-3">Update Account</Link>
+            <Link to="updateExpertAccount" className="nav-link px-3">Update Account</Link>
           </li>  
           <li className="nav-item">
             <Link to="addQuestion" className="nav-link px-3">Add Question</Link>

@@ -37,17 +37,17 @@ public class ExpertController {
 	@Autowired
 	SubjectService subService;
 
-//	@PostMapping("/expertRegistration")
-//	public Expert saveExpert(@RequestBody ExpertRegistrationDummy expert) {
-//		Role role = rService.getRole(4);
-//
-//		User user = new User(expert.getUname(), expert.getPwd(), role, true);
-//		uService.save(user);
-//		Subject subject =new  Subject(subService.getSubject());
-//		Expert exp = new Expert(expert.getFname(), expert.getLname(), expert.getQualification(), expert.getContact(),
-//				expert.getEmail(), user, subject);
-//		return eService.saveExpert(exp);
-//	}
+	@PostMapping("/expertRegistration")
+	public Expert saveExpert(@RequestBody ExpertRegistrationDummy expert) {
+		Role role = rService.getRole(4);
+
+		User user = new User(expert.getUname(), expert.getPwd(), role, true);
+		uService.save(user);
+		Subject subject =subService.getSubject(expert.getSubject());
+		Expert exp = new Expert(expert.getFname(), expert.getLname(), expert.getQualification(), expert.getContact(),
+				expert.getEmail(), user, subject);
+		return eService.saveExpert(exp);
+	}
 
 	@GetMapping("/getExpertByUid")
 	public Expert getExpertById(@RequestParam("uid") int id) {
@@ -59,5 +59,8 @@ public class ExpertController {
 	public List<Question> getQuestions() {
 		return qService.getQuestions();
 	}
-	
+	@GetMapping("/viewQuizByCategory")
+	public List<Question> getQuestionsByCategory(@RequestParam("cat_id") int cat_id) {
+		return qService.getQuestionsByCategory(cat_id);
+	}
 }

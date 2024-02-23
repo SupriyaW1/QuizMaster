@@ -40,4 +40,10 @@ public class QuestionService {
 	public Question findByQid(int qid) {
 		return queRepo.findById(qid).get();
 	}
+
+	public List<Question> getQuestionsByCategory(int cat_id) {
+		Category cat = catRepository.findById(cat_id).get();
+
+		return queRepo.getQuestionsByCategory(cat);
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizmaster.dummy.StudentAnswerDummy;
+import com.quizmaster.entities.AnswerList;
 import com.quizmaster.entities.Exam;
 import com.quizmaster.entities.Question;
 import com.quizmaster.entities.Student;
@@ -50,20 +51,28 @@ public class StudentAnswerController {
 		return null;
 	}*/
 	@PostMapping("/saveStudentAnswers")
-	public List<StudentAnswer> saveStudentAnswers(@RequestBody StudentAnswerDummy dummyList) {
-		List<StudentAnswer> answers=dummyList.getAnswers();
+	public int saveStudentAnswers(@RequestBody StudentAnswerDummy dummyList) {
+		System.out.println(dummyList);
+		List<AnswerList> answers=dummyList.getAnswers();
 		System.out.println(answers);
-		ArrayList<StudentAnswer> studAnswers = new ArrayList<>();
+		//ArrayList<StudentAnswer> studAnswers = new ArrayList<>();
 	    Exam exam = null;
 	    Question question = null;
 	    StudentAnswer studentAnswer = null;
-	    for (StudentAnswer answer : answers) {
-	        question = answer.getQid();
-	        exam = answer.getExam_id();
+	    int result = 0;
+	    for (AnswerList answer : answers) {
+	        question =  queService.findByQid(answer.getQid());
+	        if(question.getAnswer() == answer.getStudent_answer())
+	        	result++;
+	        exam =  eService.findByEaxamid(answer.getExam_id());
 	        studentAnswer = new StudentAnswer(answer.getStudent_answer(), exam, question);
-	        studAnswers.add(studentAnswer);
+	        //studAnswers.add(studentAnswer);
+	        sAnswerService.save(studentAnswer);
 	    }
-	    return sAnswerService.saveStudentAnswers(studAnswers);
+	    return eService.updateResult(answers.get(0).getExam_id(), result);
+	    
+	    
+	    //return sAnswerService.saveStudentAnswers(studAnswers);
 		//return null;
 	}
 	

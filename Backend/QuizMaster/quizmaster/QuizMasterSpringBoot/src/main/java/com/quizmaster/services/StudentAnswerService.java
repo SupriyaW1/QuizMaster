@@ -32,5 +32,10 @@ public class StudentAnswerService {
 		Exam exam=examRepository.findById(eid).get();
 		return sAnswerRepository.getAnswersByExamId(exam);
 	}
+	
+	public StudentAnswer save(StudentAnswer sa)
+	{
+		return sAnswerRepository.save(sa);
+	}
 
 }

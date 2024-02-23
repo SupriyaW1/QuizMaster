@@ -9,10 +9,14 @@ import ExpertHome from './components/ExpertHome';
 import ManageAccount from './components/ManageAccount';
 import CreateQuizCategories from './components/CreateQuizCategories';
 import AddQuiz from './components/AddQuiz';
-import ViewQuiz from './ViewQuiz';
+import ViewQuiz from './components/ViewQuiz';
 import AttemptQuiz from './components/AttemptQuiz';
 import StudentHome from './components/StudentHome';
 import StartQuiz from './components/StartQuiz';
+import ViewSubjects from './components/ViewSubjects';
+import UpdateExpertAccount from './components/UpdateExpertAccount';
+import UpdateStudentAccount from './components/UpdateStudentAccount';
+import MakeSubscription from './components/MakeSubscription';
 //import Home from './components/Home';
 
 function App() {
@@ -39,19 +43,22 @@ function App() {
     <Route path="/signup" element={<Signup/>} />
     <Route path="/login" element={<Login/>}/>
     <Route path="/adminHome" element={<AdminHome/>}>
-           <Route path="expertRegistration" element={<ExpertRegistration/>} />
-           <Route path="manageAccount" element={<ManageAccount />} />
-          <Route path="createQuizCategories" element={<CreateQuizCategories />} />
-          
+       <Route path="expertRegistration" element={<ExpertRegistration/>} />
+       <Route path="manageAccount" element={<ManageAccount />} />
+       <Route path="createQuizCategories" element={<CreateQuizCategories />} />
+       <Route path="viewSubjects" element={<ViewSubjects />} />   
     </Route>
     <Route path="/logout" element={<Logout/>}></Route>
     <Route path="/expertHome" element={<ExpertHome/>}>
       <Route path="viewQuiz" element={<ViewQuiz/>}/>
       <Route path="addQuestion" element={<AddQuiz/>}/>
+      <Route path="updateExpertAccount" element={<UpdateExpertAccount/>}/>
     </Route>
     <Route path="/studentHome" element={<StudentHome/>}>
       <Route path="attemptQuiz" element={<AttemptQuiz/>}></Route>
+      <Route path="updateAccount" element={<UpdateStudentAccount/>}></Route>
       <Route path="startQuiz" element={<StartQuiz/>}></Route>
+      <Route path="makeSubscription" element={<MakeSubscription/>}></Route>
     </Route>
 
     </Routes>

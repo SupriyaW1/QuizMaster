@@ -1,5 +1,6 @@
 package com.quizmaster.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class UserService {
 
 	public User save(User user) {
 		return urepo.save(user);
+	}
+
+	public List<User> getAllUsers() {
+		return urepo.findAll();
 	}
 
 }

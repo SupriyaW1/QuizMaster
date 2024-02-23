@@ -1,5 +1,6 @@
+import React, { useReducer, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useReducer } from 'react';
+
 const initialFormData = {
   fname: '',
   lname: '',
@@ -12,6 +13,7 @@ const initialFormData = {
 };
 
 const initialErrors = {};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_FIELD':
@@ -37,11 +39,38 @@ const ExpertRegistration = () => {
     errors: initialErrors
   });
 
-  const { errors } = state;
-  const navigate=useNavigate();
+  const [subjects, setSubjects] = useState([]);
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchSubjects();
+  }, []);
+
+  const fetchSubjects = () => {
+    fetch(`http://localhost:8080/allSubjects`)
+      .then(response => {
+        if (response.ok)
+          return response.json();
+        else
+          throw new Error('Failed to fetch subjects');
+      })
+      .then(data => {
+        setSubjects(data);
+      })
+      .catch(error => {
+        console.error('Error fetching subjects:', error);
+      });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({ type: 'SET_FIELD', field: name, value });
+  };
+
+  const handleSubjectChange = (e) => {
+    setSelectedSubject(e.target.value);
+    dispatch({ type: 'SET_FIELD', field: 'subject', value: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -111,12 +140,12 @@ const ExpertRegistration = () => {
                       type="text"
                       id="fname"
                       name="fname"
-                      className={`form-control ${errors.fname && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.fname && 'is-invalid'}`}
                       value={state.fname}
                       onChange={handleChange}
                       placeholder="Write First Name Here"
                     />
-                    {errors.fname && <div className="invalid-feedback">{errors.fname}</div>}
+                    {state.errors && state.errors.fname && <div className="invalid-feedback">{state.errors.fname}</div>}
                   </div>
                 </div>
                 {/* Last Name */}
@@ -127,12 +156,12 @@ const ExpertRegistration = () => {
                       type="text"
                       id="lname"
                       name="lname"
-                      className={`form-control ${errors.lname && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.lname && 'is-invalid'}`}
                       value={state.lname}
                       onChange={handleChange}
                       placeholder="Write Last Name Here"
                     />
-                    {errors.lname && <div className="invalid-feedback">{errors.lname}</div>}
+                    {state.errors && state.errors.lname && <div className="invalid-feedback">{state.errors.lname}</div>}
                   </div>
                 </div>
                 {/* Qualification */}
@@ -143,28 +172,31 @@ const ExpertRegistration = () => {
                       type="text"
                       id="qualification"
                       name="qualification"
-                      className={`form-control ${errors.qualification && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.qualification && 'is-invalid'}`}
                       value={state.qualification}
                       onChange={handleChange}
                       placeholder="Write Qualification Here"
                     />
-                    {errors.qualification && <div className="invalid-feedback">{errors.qualification}</div>}
+                    {state.errors && state.errors.qualification && <div className="invalid-feedback">{state.errors.qualification}</div>}
                   </div>
                 </div>
                 {/* Subject */}
                 <div className="mb-3 row">
                   <label htmlFor="subject" className="col-sm-4 col-form-label text-end">Subject:</label>
                   <div className="col-sm-8">
-                    <input
-                      type="text"
+                    <select
                       id="subject"
                       name="subject"
-                      className={`form-control ${errors.subject && 'is-invalid'}`}
-                      value={state.subject}
-                      onChange={handleChange}
-                      placeholder="Write Subject Here"
-                    />
-                    {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
+                      className={`form-control ${state.errors && state.errors.subject && 'is-invalid'}`}
+                      value={selectedSubject}
+                      onChange={handleSubjectChange}
+                    >
+                      <option value="">--Select Subject--</option>
+                      {subjects.map(subject => (
+                        <option key={subject.subject_id} value={subject.subject_id}>{subject.subject_name}</option>
+                      ))}
+                    </select>
+                    {state.errors && state.errors.subject && <div className="invalid-feedback">{state.errors.subject}</div>}
                   </div>
                 </div>
                 {/* Contact */}
@@ -175,13 +207,13 @@ const ExpertRegistration = () => {
                       type="tel"
                       id="contact"
                       name="contact"
-                      className={`form-control ${errors.contact && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.contact && 'is-invalid'}`}
                       value={state.contact}
                       onChange={handleChange}
                       placeholder="Write Contact Here"
                       maxLength={10}
                     />
-                    {errors.contact && <div className="invalid-feedback">{errors.contact}</div>}
+                    {state.errors && state.errors.contact && <div className="invalid-feedback">{state.errors.contact}</div>}
                   </div>
                 </div>
                 {/* Email */}
@@ -192,28 +224,28 @@ const ExpertRegistration = () => {
                       type="email"
                       id="email"
                       name="email"
-                      className={`form-control ${errors.email && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.email && 'is-invalid'}`}
                       value={state.email}
                       onChange={handleChange}
                       placeholder="Write Email Here"
                     />
-                    {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                    {state.errors && state.errors.email && <div className="invalid-feedback">{state.errors.email}</div>}
                   </div>
                 </div>
-                 {/* Username */}
-                 <div className="mb-3 row">
+                {/* Username */}
+                <div className="mb-3 row">
                   <label htmlFor="uname" className="col-sm-4 col-form-label text-end">Username:</label>
                   <div className="col-sm-8">
                     <input
                       type="text"
                       id="uname"
                       name="uname"
-                      className={`form-control ${errors.uname && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.uname && 'is-invalid'}`}
                       value={state.uname}
                       onChange={handleChange}
                       placeholder="Write Username Here"
                     />
-                    {errors.uname && <div className="invalid-feedback">{errors.uname}</div>}
+                    {state.errors && state.errors.uname && <div className="invalid-feedback">{state.errors.uname}</div>}
                   </div>
                 </div>
                 {/* pwd */}
@@ -224,12 +256,12 @@ const ExpertRegistration = () => {
                       type="password"
                       id="pwd"
                       name="pwd"
-                      className={`form-control ${errors.pwd && 'is-invalid'}`}
+                      className={`form-control ${state.errors && state.errors.pwd && 'is-invalid'}`}
                       value={state.pwd}
                       onChange={handleChange}
                       placeholder="Write pwd Here"
                     />
-                    {errors.pwd && <div className="invalid-feedback">{errors.pwd}</div>}
+                    {state.errors && state.errors.pwd && <div className="invalid-feedback">{state.errors.pwd}</div>}
                   </div>
                 </div>
                

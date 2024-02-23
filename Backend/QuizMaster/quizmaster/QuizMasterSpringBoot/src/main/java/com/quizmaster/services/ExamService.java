@@ -17,5 +17,10 @@ public class ExamService {
 	public Exam findByEaxamid(int exam_id) {
 		return examRepo.findById(exam_id).get();
 	}
+	
+	public int updateResult(int examid, int result)
+	{
+		return examRepo.updateResult(examid, result);
+	}
 
 }

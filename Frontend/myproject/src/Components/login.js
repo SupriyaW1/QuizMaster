@@ -25,10 +25,10 @@ export default function Login() {
   const [users, dispatch] = useReducer(reducer, init);
   const [info, setInfo] = useState("");
   const myaction = useDispatch();
-  //const mystate = useSelector((state) => state.logged);
   const navigate = useNavigate();
-  const reduxAction=useDispatch();
+  const reduxAction = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (key, value) => {
     dispatch({ type: "update", data: { key, value, touched: true } });
   };
@@ -46,37 +46,26 @@ export default function Login() {
     };
 
     fetch("http://localhost:8080/login", reqOptions)
-      .then((res) => res.json()) 
+      .then((res) => res.json())
       .then((data) => {
-        setInfo(data);
-          reduxAction(login())
         if (data && data.role_id) {
+          localStorage.setItem("name", JSON.stringify(data));
           if (data.role_id.role_id === 1) {
-           localStorage.setItem("name", JSON.stringify(data));
             navigate("/adminHome");
-            myaction(login());
-          }
-          else if (data.role_id.role_id === 2) {
-            console.log("valid ");
-            console.log("after dispatch");
-            localStorage.setItem("name", JSON.stringify(data));
+          } else if (data.role_id.role_id === 2) {
             navigate("/studentHome");
-            myaction(login());
-          }
-          else if (data.role_id.role_id === 4) {
-            console.log("valid ");
-            console.log("after dispatch");
-            localStorage.setItem("name", JSON.stringify(data));
+          } else if (data.role_id.role_id === 4) {
             navigate("/expertHome");
-            myaction(login());
           }
-        } 
-        
+          myaction(login());
+        } else {
+          setInfo("Invalid Credentials");
+        }
       })
-      .catch(error=>{
-          console.error("Error fetching data",error);
-          setInfo("Invalid Credentials")
-      })
+      .catch((error) => {
+        console.error("Error fetching data", error);
+        setInfo("Invalid Credentials. Please try again.");
+      });
   };
 
   return (
@@ -156,7 +145,7 @@ export default function Login() {
         </div>
         <div className="col"></div>
       </div>
-      <h1> {info} </h1>
+      {info && <div className="text-danger text-center">{info}</div>}
     </div>
   );
 }
