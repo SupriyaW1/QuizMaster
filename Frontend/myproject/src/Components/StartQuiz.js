@@ -120,6 +120,7 @@ const savedAnswers = Object.keys(localStorage)
         .then(response => {
             if (response.ok) {
                 console.log('Student answers submitted successfully.');
+                alert("Exam Submitted")
                 navigate("/studentHome");
             } else {
                 console.error('Failed to submit student answers.');

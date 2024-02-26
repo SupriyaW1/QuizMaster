@@ -30,7 +30,7 @@ export default function CreateQuizCategories() {
 
   const handleCreateCategory = (event) => {
     event.preventDefault();
-    fetch("http://localhost:8080/createCategory", {
+    fetch("http://localhost:8080/addCategory", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

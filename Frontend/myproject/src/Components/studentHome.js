@@ -30,9 +30,9 @@ export default function StudentHome() {
             <li className="nav-item">
               <Link to="viewResults" className="nav-link px-3">View Results</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="giveFeedback" className="nav-link px-3">Give Feedback</Link>
-            </li>
+            </li> */}
             {/* <li className="nav-item">
               <Link to="makeSubscription" className="nav-link px-3">Make Subscription</Link>
             </li> */}

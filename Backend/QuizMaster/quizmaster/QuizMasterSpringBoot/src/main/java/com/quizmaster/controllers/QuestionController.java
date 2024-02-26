@@ -28,11 +28,11 @@ public class QuestionController {
 	public Question addQuestion(@RequestBody AddQuetionDummy question) {
 		Subject subject =subService.getSubject(1);
 		Category catagory = catService.getCategory(question.getCat_id());
-		System.out.println(catagory);
+		//System.out.println(catagory);
 		Question que = new Question(question.getQuestion_text(), question.getOption1(), question.getOption2(),
 				question.getOption3(), question.getOption4(), question.getAnswer(), question.getExplaination(), subject,
 				catagory);
-		System.out.println(que);
+		//System.out.println(que);
 		return queService.addQuetion(que);
 	}
 }

@@ -24,6 +24,10 @@ public class CategoryService {
 		return catRepo.findAll();
 	}
 
+	public Category addCategory(Category category) {
+		return catRepo.save(category);
+	}
+
 //	public Category getCategory(int cat_id) {
 //		Optional<Category> categoryOptional = catRepo.findById(cat_id);
 //		Category catagory = null;
