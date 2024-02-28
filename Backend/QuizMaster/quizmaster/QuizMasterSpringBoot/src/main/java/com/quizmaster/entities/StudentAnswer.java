@@ -15,16 +15,15 @@ import javax.persistence.Table;
 public class StudentAnswer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int answer_id;
+	private int answer_id;
 	@Column
-	int student_answer;
+	private int student_answer;
 	@OneToOne
 	@JoinColumn(name = "exam_id")
-	Exam exam_id;
+	private Exam exam_id;
 	@OneToOne
 	@JoinColumn(name = "qid")
-	Question qid;
-	
+	private Question qid;
 
 	public StudentAnswer() {
 		super();
@@ -36,7 +35,7 @@ public class StudentAnswer {
 		this.student_answer = student_answer;
 		this.exam_id = exam_id;
 		this.qid = qid;
-		
+
 	}
 
 	public int getAnswer_id() {
@@ -71,12 +70,10 @@ public class StudentAnswer {
 		this.qid = qid;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "StudentAnswer [answer_id=" + answer_id + ", student_answer=" + student_answer + ", exam_id=" + exam_id
-				+ ", qid=" + qid +  "]";
+				+ ", qid=" + qid + "]";
 	}
 
 }

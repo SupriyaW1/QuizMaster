@@ -15,23 +15,23 @@ public class Expert {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int expert_id;
+	private int expert_id;
 	@Column
-	String fname;
+	private String fname;
 	@Column
-	String lname;
+	private String lname;
 	@Column
-	String qualification;
+	private String qualification;
 	@Column
-	String contact;
+	private String contact;
 	@Column
-	String email;
+	private String email;
 	@OneToOne
 	@JoinColumn(name = "uid")
-	User user;
+	private User user;
 	@OneToOne
 	@JoinColumn(name = "subject_id")
-	Subject subject_id;
+	private Subject subject_id;
 
 	public Expert() {
 		super();

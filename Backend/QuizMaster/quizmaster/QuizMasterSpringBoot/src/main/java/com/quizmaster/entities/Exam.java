@@ -21,20 +21,20 @@ public class Exam {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int exam_id;
+	private int exam_id;
 	@Column
-	Timestamp attempted_datetime;
+	private Timestamp attempted_datetime;
 	@Column
-	int marks;
+	private int marks;
 	@ManyToOne
 	@JoinColumn(name = "sid")
-	Student sid;
+	private Student sid;
 	@OneToOne
 	@JoinColumn(name = "subject_id")
-	Subject subject_id;
+	private Subject subject_id;
 	@OneToOne
 	@JoinColumn(name = "cat_id")
-	Category cat_id;
+	private Category cat_id;
 
 	public int getExam_id() {
 		return exam_id;
@@ -88,8 +88,6 @@ public class Exam {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public Exam(Timestamp attempted_datetime, Student sid, Subject subject_id, Category cat_id) {
 		super();

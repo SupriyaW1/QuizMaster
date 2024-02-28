@@ -15,22 +15,21 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int uid;
+	private int uid;
 	@Column
-	String uname;
+	private String uname;
 	@Column
-	String pwd;
+	private String pwd;
 	
 	@ManyToOne
 	@JoinColumn(name="role_id")
-	Role role_id;
+	private Role role_id;
 	@Column
-	boolean status;
+	private boolean status;
 	
 	
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

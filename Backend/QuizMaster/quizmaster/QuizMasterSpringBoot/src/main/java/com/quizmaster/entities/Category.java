@@ -9,9 +9,9 @@ import javax.persistence.Table;
 @Table(name = "categories")
 public class Category {
 	@Id
-	int cat_id;
+	private int cat_id;
 	@Column
-	String cat_name;
+	private String cat_name;
 
 	public int getCat_id() {
 		return cat_id;

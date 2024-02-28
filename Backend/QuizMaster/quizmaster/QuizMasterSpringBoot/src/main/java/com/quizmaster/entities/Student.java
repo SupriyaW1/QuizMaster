@@ -14,22 +14,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "students")
 public class Student {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int sid;
-	String fname;
+	private int sid;
+	private String fname;
 	@Column
-	String lname;
-    Date bdate;
-	String education;
-	String contact;
-	String email;
-	int subscription;
-	
+	private String lname;
+	private Date bdate;
+	private String education;
+	private String contact;
+	private String email;
+	private int subscription;
+
 	@OneToOne
 	@JoinColumn(name = "uid")
-	User uid;
+	private User uid;
 
 	public Student() {
 		super();
@@ -128,9 +128,5 @@ public class Student {
 				+ education + ", contact=" + contact + ", email=" + email + ", subscription=" + subscription + ", uid="
 				+ uid + "]";
 	}
-	
-	
-	
-	
-	
+
 }

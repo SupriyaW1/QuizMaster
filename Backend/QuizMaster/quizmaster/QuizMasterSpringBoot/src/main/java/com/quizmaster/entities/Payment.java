@@ -22,20 +22,19 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "payments")
 public class Payment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int pid;
+	private int pid;
 	@Column
-	String mode;
+	private String mode;
 	@Column
-	Date date;
+	private Date date;
 	@Column
-	Date expirydate;
-	
+	private Date expirydate;
+
 	@OneToOne
 	@JoinColumn(name = "sid")
-	Student sid;
-	
+	private Student sid;
 
 }

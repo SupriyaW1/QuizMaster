@@ -14,27 +14,27 @@ import javax.persistence.Table;
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int qid;
+	private int qid;
 	@Column
-	String question_text;
+	private String question_text;
 	@Column
-	String option1;
+	private String option1;
 	@Column
-	String option2;
+	private String option2;
 	@Column
-	String option3;
+	private String option3;
 	@Column
-	String option4;
+	private String option4;
 	@Column
-	int answer;
+	private int answer;
 	@Column
-	String explanation;
+	private String explanation;
 	@OneToOne
 	@JoinColumn(name = "subject_id")
-	Subject subject_id;
+	private Subject subject_id;
 	@OneToOne
 	@JoinColumn(name = "cat_id")
-	Category cat_id;
+	private Category cat_id;
 
 	public int getQid() {
 		return qid;
@@ -134,7 +134,6 @@ public class Question {
 		this.subject_id = subject_id;
 		this.cat_id = cat_id;
 	}
-
 
 	@Override
 	public String toString() {
